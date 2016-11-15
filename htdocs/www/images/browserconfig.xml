@@ -1,0 +1,11 @@
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square70x70logo src="/images/bata_ikona_76.jpg"/>
+            <square150x150logo src="/images/bata_ikona_120.jpg"/>
+            <square310x310logo src="/images/bata_ikona_152.jpg"/>
+            <wide310x150logo src="/images/bata_ikona_180.jpg"/>
+            <TileColor>#fffff</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>

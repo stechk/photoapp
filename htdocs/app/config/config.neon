@@ -1,0 +1,22 @@
+parameters:
+    soapUrl: "https://websrv.albixon.cz:8444/EPF2WebService.asmx" #ostra
+#    soapUrl: "https://websrv.albixon.cz:8447/EPF2WebService.asmx" #test
+    soapLogin: axvp
+    soapPass: axvp123
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 30 days
+	savePath: "%tempDir%/session"
+
+
+services:
+	router: App\RouterFactory::createRouter
+	- Model\PhotoModel
+	- App\Model\SoapService(%soapUrl%, %soapLogin%, %soapPass%)

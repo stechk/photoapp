@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{$basePath}/css/main.css?1" media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    {*<title>{ifset title}{include title|stripHtml} | {/ifset}ALBIXON</title>*}
+    <title>Foto Albixon</title>
+
+    <link rel="apple-touch-icon" sizes="76x76"   href="{$basePath}/images/bata_ikona_76.jpg" />
+    <link rel="apple-touch-icon" sizes="120x120" href="{$basePath}/images/bata_ikona_120.jpg" />
+    <link rel="apple-touch-icon" sizes="152x152" href="{$basePath}/images/bata_ikona_152.jpg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/images/bata_ikona_180.jpg" />
+
+    <link rel="icon" sizes="16x16" href="{$basePath}/images/bata_ikona_16.jpg" />
+    <link rel="icon" sizes="32x32" href="{$basePath}/images/bata_ikona_32.jpg" />
+    <link rel="icon" sizes="96x96" href="{$basePath}/images/bata_ikona_96.jpg" />
+    <link rel="icon" sizes="192x192" href="{$basePath}/images/bata_ikona_192.jpg" />
+    <link rel="shortcut icon" href="{$basePath}/images/bata_ikona_fav.ico" />
+
+
+    <meta name="msapplication-TileColor" content="#fffff" />
+    <meta name="msapplication-TileImage" content="{$basePath}/images/bata_ikona_96.jpeg" />
+    <meta name="msapplication-config"    content="{$basePath}/images/browserconfig.xml" />
+</head>
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile">
+                <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, $presenter->type != null ? checked">
+
+                    {if $presenter->type != null}
+                        <a href="{link Homepage:default, type => null, op => null}" class="done">Co fotit&nbsp;<i class="material-icons tiny">done</i></a>
+                        {else}
+                        <a href="{link Homepage:default}">Co fotit</a>
+                    {/if}
+                </li>
+                <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, $presenter->op != null && $presenter->type != null ? checked">
+                    {if $presenter->type != null && $presenter->op != null}
+                        <a href="{link Homepage:op, op => null}" class="done">Výběr OP&nbsp;<i class="material-icons tiny">done</i></a>
+                    {else}
+                        <span>Výběr OP</span>
+                    {/if}
+                </li>
+                <li n:class="$presenter->isLinkCurrent('Homepage:photoform') ? active">
+                    {if $presenter->type != null && $presenter->op != null}
+                        <a href="{link Homepage:photoform}">Foť</a>
+                    {else}
+                        <span>Foť</span>
+                    {/if}
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+{include content}
+
+<footer id="footer">
+</footer>
+{block scripts}
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    {*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*}
+    <script type="text/javascript" src="{$basePath}/js/materialize.min.js"></script>
+    <script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.ui.widget.js"></script>
+    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
+    <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.fileupload-process.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.fileupload-image.js"></script>
+    <script type="text/javascript" src="{$basePath}/js/jquery.fileupload-validate.js"></script>
+    {*<script type="text/javascript" src="{$basePath}/js/jquery.fileupload-ui.js"></script>*}
+    <script type="text/javascript" src="{$basePath}/js/main.js?1"></script>
+{*{if \Tracy\Debugger::$productionMode && preg_match('/podnety.albixon.cz/', strtolower($_SERVER['HTTP_HOST']))}*}
+    {*<script src="{$basePath}/js/ga.js?{time()|noescape}"></script>*}
+{*{/if}*}
+{/block}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{block content}
+{form uploadForm, class => 'mt20 m10'}
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>Fotografie</span>
+            {input upload}
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+    <div class="button-col center">
+        {input submit, class=>"btn waves-effect waves-light btn-large"}
+    </div>
+{ifset $photos}
+    <div n:if="count($photos) > 0" class="attachments">
+        <p>Nahrané přílohy:</p>
+        <ul>{dump $photos}
+            {foreach $photos as $a}
+                <div class="imgcenter smaller">
+                    <li>
+                        <img class="materialboxed" src="{$a->filepath}">
+                    </li>
+                </div>
+            {/foreach}
+        </ul>
+    </div>
+{/ifset}
+{/form}
