@@ -5,13 +5,21 @@ $btnColor: #F44336;
 
 body {
   margin-bottom: 40px;
+  h1{
+    font-size: 3.2rem;
+  }
 }
 
 nav {
   background-color: $albixonGreenColor;
 }
 
-
+.photo {
+  margin-bottom: 20px;
+  img {
+    max-width: 100%;
+  }
+}
 
 .btn {
   background-color: $albixonGreenColor;
@@ -49,6 +57,8 @@ nav {
     }
     a, span {
       font-size: 1.3rem;
+      //position: relative;
+      //margin-top: -10px;
     }
     i {
       display: inline-block;
@@ -57,6 +67,19 @@ nav {
     }
     .done {
       color: lightgrey;
+    }
+    .item {
+      margin-top: -10px;
+      padding-bottom: 10px;
+      display: block;
+      position: relative;
+    }
+    .second-line {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 20px;
+      height: 30px;
     }
   }
 }
@@ -242,18 +265,24 @@ label {
       }
     }
   }
+  body{
+    h1{
+      font-size: 2.2rem;
+    }
+  }
+
 }
 
 @media (min-width: 500px) {
   .oplinks {
     width: 450px;
-    .half{
+    .half {
       width: 50%;
       float: left;
       display: inline;
       margin-bottom: 10px;
     }
-    .full{
+    .full {
       width: 100%;
       display: inline;
       margin-bottom: 10px;

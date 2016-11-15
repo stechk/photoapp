@@ -14,16 +14,57 @@
     </div>
 {ifset $photos}
     <div n:if="count($photos) > 0" class="attachments">
-        <p>Nahrané přílohy:</p>
-        <ul>{dump $photos}
+        <p><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
+        <p>Montáž</p>
+        <ul>
+            {var $montaz = 0}
             {foreach $photos as $a}
-                <div class="imgcenter smaller">
-                    <li>
-                        <img class="materialboxed" src="{$a->filepath}">
-                    </li>
-                </div>
+                {if $a->type == \Model\PhotoModel::TYPE_CONSTRUCT}
+                    {var $montaz += 1}
+                    <div class="imgcenter smaller">
+                        <li class="photo">
+                            <img class="materialboxed" src="{$a->filepath}">
+                        </li>
+                    </div>
+                {/if}
             {/foreach}
         </ul>
+        {if empty($montaz)}<p>Žádné fotografie z montáže nenalezeny</p>{/if}
+
+        <p>Servis</p>
+
+        {var $servis = 0}
+        {foreach $photos as $a}
+            {if $a->type == \Model\PhotoModel::TYPE_SERVICE}
+                {var $servis += 1}
+                    <ul>
+                        <div class="imgcenter smaller">
+                            <li class="photo">
+                                <img class="materialboxed" src="{$a->filepath}">
+                            </li>
+                        </div>
+                    </ul>
+            {/if}
+        {/foreach}
+        {if empty($servis)}<p>Žádné fotografie ze servisu nenalezeny</p>{/if}
+        <p>Zaměření</p>
+
+        {var $zamereni = 0}
+        {foreach $photos as $a}
+            {if $a->type == \Model\PhotoModel::TYPE_MEASUREMENT}
+                {var $zamereni =+ 1}
+                    <ul>
+                        <div class="imgcenter smaller">
+                            <li class="photo">
+                                <img class="materialboxed" src="{$a->filepath}">
+                            </li>
+                        </div>
+                    </ul>
+            {/if}
+        {/foreach}
+        {if empty($zamereni)}<p>Žádné fotografie ze zaměření nenalezeny</p>{/if}
+
+        {dump $photos}
     </div>
 {/ifset}
 {/form}

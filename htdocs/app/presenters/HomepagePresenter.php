@@ -32,7 +32,7 @@ class HomepagePresenter extends BasePresenter
 
     }
 
-    public function renderDefault()
+    public function render()
     {
 
     }
@@ -40,6 +40,18 @@ class HomepagePresenter extends BasePresenter
     {
         $files = $this->presenter->getHttpRequest()->getFiles();
         $post = $this->presenter->getHttpRequest()->getPost();
+        if (isset($this->type)){
+            if ($this->type == PhotoModel::TYPE_CONSTRUCT){
+                $typeTemplate = 'Montáž';
+            }
+            if ($this->type == PhotoModel::TYPE_MEASUREMENT){
+                $typeTemplate = 'Zaměření';
+            }
+            if ($this->type == PhotoModel::TYPE_SERVICE){
+                $typeTemplate = 'Servis';
+            }
+            $this->template->typeText = $typeTemplate;
+        }
         if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit") {
             if (count($files) > 0) {
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';

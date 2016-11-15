@@ -6328,9 +6328,16 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em; } }
 body {
   margin-bottom: 40px; }
+  body h1 {
+    font-size: 3.2rem; }
 
 nav {
   background-color: #419c2a; }
+
+.photo {
+  margin-bottom: 20px; }
+  .photo img {
+    max-width: 100%; }
 
 .btn, .btn-large {
   background-color: #419c2a; }
@@ -6367,6 +6374,17 @@ nav {
       color: white; }
     #nav-mobile li .done {
       color: lightgrey; }
+    #nav-mobile li .item {
+      margin-top: -10px;
+      padding-bottom: 10px;
+      display: block;
+      position: relative; }
+    #nav-mobile li .second-line {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 20px;
+      height: 30px; }
 
 .date {
   display: block;
@@ -6490,7 +6508,10 @@ label {
 
 @media (max-width: 480px) {
   #nav-mobile li a, #nav-mobile li span {
-    font-size: small; } }
+    font-size: small; }
+
+  body h1 {
+    font-size: 2.2rem; } }
 @media (min-width: 500px) {
   .oplinks {
     width: 450px; }
