@@ -12,11 +12,11 @@
 {/form}
 {ifset $searchResult}
     <p class="center">Nalezeno {count($searchResult)} výsledků</p>
-    <ul class="oplinks">
+    <ul class="oplinks center">
         {foreach $searchResult as $number}
-            {*<div class="foto-links center" id="ops">*}
-                <li class="center" id="ops"><a href="{link Homepage:photoform, op => $number[op]}" class="larger">{$number[op]}</a></li>
-            {*</div>*}
+            <li n:class="count($searchResult) == 1 ? full : half" id="ops"><a
+                        href="{link Homepage:photoform, op => $number[op]}"
+                        class="larger">{$number[op]}</a></li>
         {/foreach}
     </ul>
 {/ifset}

@@ -6494,9 +6494,13 @@ label {
 @media (min-width: 500px) {
   .oplinks {
     width: 450px; }
-    .oplinks li {
+    .oplinks .half {
       width: 50%;
       float: left;
+      display: inline;
+      margin-bottom: 10px; }
+    .oplinks .full {
+      width: 100%;
       display: inline;
       margin-bottom: 10px; } }
 @media (min-width: 480px) and (max-width: 600px) {

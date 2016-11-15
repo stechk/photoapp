@@ -247,10 +247,14 @@ label {
 @media (min-width: 500px) {
   .oplinks {
     width: 450px;
-    li{
+    .half{
       width: 50%;
-      //line-height: 1.5em;
       float: left;
+      display: inline;
+      margin-bottom: 10px;
+    }
+    .full{
+      width: 100%;
       display: inline;
       margin-bottom: 10px;
     }

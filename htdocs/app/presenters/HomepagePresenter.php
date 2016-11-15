@@ -36,7 +36,6 @@ class HomepagePresenter extends BasePresenter
     {
 
     }
-//2016-11-15-8-11-
     protected function beforeRender()
     {
         $files = $this->presenter->getHttpRequest()->getFiles();
