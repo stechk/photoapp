@@ -12,7 +12,6 @@ namespace App\Model;
 use Nette\Utils\Arrays;
 use Nette\Utils\DateTime;
 use Nette\Utils\Json;
-use DOMDocument;
 
 class SoapService
 {
@@ -67,7 +66,7 @@ class SoapService
         if (!$response) {
             return [];
         }
-        $doc = new DOMDocument();
+        $doc = new \DOMDocument();
         $doc->loadXML($response);
 
         $ops = [];
