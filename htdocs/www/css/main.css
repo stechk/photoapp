@@ -6339,6 +6339,9 @@ nav {
   .photo img {
     max-width: 100%; }
 
+.large {
+  font-size: large; }
+
 .btn, .btn-large {
   background-color: #419c2a; }
 

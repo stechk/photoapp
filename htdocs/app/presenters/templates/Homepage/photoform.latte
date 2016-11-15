@@ -14,8 +14,8 @@
     </div>
 {ifset $photos}
     <div n:if="count($photos) > 0" class="attachments">
-        <p><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
-        <p>Montáž</p>
+        <p class="large"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
+        <p><strong>Montáž</strong></p>
         <ul>
             {var $montaz = 0}
             {foreach $photos as $a}
@@ -31,7 +31,7 @@
         </ul>
         {if empty($montaz)}<p>Žádné fotografie z montáže nenalezeny</p>{/if}
 
-        <p>Servis</p>
+        <p><strong>Servis</strong></p>
 
         {var $servis = 0}
         {foreach $photos as $a}
@@ -47,7 +47,7 @@
             {/if}
         {/foreach}
         {if empty($servis)}<p>Žádné fotografie ze servisu nenalezeny</p>{/if}
-        <p>Zaměření</p>
+        <p><strong>Zaměření</strong></p>
 
         {var $zamereni = 0}
         {foreach $photos as $a}
