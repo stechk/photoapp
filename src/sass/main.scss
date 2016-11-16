@@ -151,26 +151,6 @@ label {
   }
 }
 
-#footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 40px;
-  width: 100%;
-  background: $albixonGreenColor;
-  z-index: 10;
-  .footer-links {
-    text-align: center;
-    margin-top: 9px;
-    a {
-      color: white;
-    }
-    .logout-link {
-      margin-left: 20px;
-    }
-  }
-}
-
 .flash {
   text-align: center;
   font-weight: bold;

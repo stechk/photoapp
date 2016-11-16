@@ -61,7 +61,7 @@ class HomepagePresenter extends BasePresenter
                 $destView = "/files" . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . $file->getSanitizedName();
                 $file->move($dest);
                 $saveData = [
-                    'destination' => $destView,
+                    'filepath' => $destView,
                     'file_name' => $file->getSanitizedName(),
                     'op' => $this->op,
                     'type' => $this->type,
