@@ -37,30 +37,30 @@
             <p><strong>Servis</strong></p>
 
             {var $servis = 0}
-            {foreach $photos as $a}
-                {if $a->type == \Model\PhotoModel::TYPE_SERVICE}
-                    {var $servis += 1}
-                    <ul>
+            <ul>
+                {foreach $photos as $a}
+                    {if $a->type == \Model\PhotoModel::TYPE_SERVICE}
+                        {var $servis += 1}
                         <li class="photo">
                             <img class="materialboxed" src="{$a->filepath}">
                         </li>
-                    </ul>
-                {/if}
-            {/foreach}
+                    {/if}
+                {/foreach}
+            </ul>
             {if empty($servis)}<p>Žádné fotografie ze servisu nenalezeny</p>{/if}
             <p><strong>Zaměření</strong></p>
 
             {var $zamereni = 0}
-            {foreach $photos as $a}
-                {if $a->type == \Model\PhotoModel::TYPE_MEASUREMENT}
-                    {var $zamereni =+ 1}
-                    <ul>
+            <ul>
+                {foreach $photos as $a}
+                    {if $a->type == \Model\PhotoModel::TYPE_MEASUREMENT}
+                        {var $zamereni =+ 1}
                         <li class="photo">
                             <img class="materialboxed" src="{$a->filepath}">
                         </li>
-                    </ul>
-                {/if}
-            {/foreach}
+                    {/if}
+                {/foreach}
+            </ul>
             {if empty($zamereni)}<p>Žádné fotografie ze zaměření nenalezeny</p>{/if}
         </div>
     {/ifset}
