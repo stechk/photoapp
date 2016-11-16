@@ -22,6 +22,16 @@ class PhotoModel
     const TYPE_SERVICE = 'servis';
 
     /**
+     * Allowed types
+     * @var array
+     */
+    private $types = [
+        ["id" =>self::TYPE_CONSTRUCT, "name" => "Montáž"],
+        ["id" =>self::TYPE_SERVICE, "name" => "Servis"],
+        ["id" =>self::TYPE_MEASUREMENT, "name" => "Zaměření"],
+    ];
+
+    /**
      * PhotoModel constructor.
      * @param Connection $database
      */
@@ -30,9 +40,40 @@ class PhotoModel
         $this->database = $database;
     }
 
-    public function findPhotoByOp($values)
+    /**
+     * @param $type
+     * @return bool
+     */
+    public function isAllowedParameter($type)
     {
-        return $this->database->query('SELECT * FROM images as i WHERE i.op = ?', $values);
+        foreach ($this->types as $item) {
+            if ($item["id"] == $type) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param $type
+     * @return mixed
+     */
+    public function getTypeByName($type)
+    {
+        foreach ($this->types as $item) {
+            if ($item["id"] == $type) {
+                return $item;
+            }
+        }
+    }
+
+    /**
+     * @param $op
+     * @return \Nette\Database\ResultSet
+     */
+    public function findPhotoByOp($op)
+    {
+        return $this->database->query('SELECT * FROM images as i WHERE i.op = ?', $op);
     }
 
     public function saveImage($data)

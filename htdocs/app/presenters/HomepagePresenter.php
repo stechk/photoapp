@@ -36,21 +36,16 @@ class HomepagePresenter extends BasePresenter
     {
         $files = $this->presenter->getHttpRequest()->getFiles();
         $post = $this->presenter->getHttpRequest()->getPost();
-        /**
-         * vypisovani typu do navbaru
-         */
-        if (isset($this->type)) {
-            if ($this->type == PhotoModel::TYPE_CONSTRUCT) {
-                $typeTemplate = 'Montáž';
-            }
-            if ($this->type == PhotoModel::TYPE_MEASUREMENT) {
-                $typeTemplate = 'Zaměření';
-            }
-            if ($this->type == PhotoModel::TYPE_SERVICE) {
-                $typeTemplate = 'Servis';
-            }
-            $this->template->typeText = $typeTemplate;
+
+        if (!$this->photoModel->isAllowedParameter($this->type) && $this->type != null) {
+            $this->type = null;
+            $this->op = null;
+            $this->redirect("Homepage:default");
         }
+
+        $this->template->type = $this->photoModel->getTypeByName($this->type);
+
+
         if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit") {
             if (count($files) > 0) {
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
@@ -68,7 +63,6 @@ class HomepagePresenter extends BasePresenter
                     'timestamp' => new Nette\Utils\DateTime()
                 ];
                 $this->photoModel->saveImage($saveData);
-
             }
             $this->terminate();
         }
@@ -84,6 +78,7 @@ class HomepagePresenter extends BasePresenter
     {
         $form = new Nette\Application\UI\Form();
         $form->addText('op', 'Hledej OP')
+            ->addRule(Nette\Application\UI\Form::INTEGER, 'OP musí být číslo')
             ->setRequired('Zadejte OP');
         $form->addSubmit('search', 'Hledat');
         $form->onSuccess[] = [$this, 'searchFormSubmitted'];

@@ -6335,9 +6335,12 @@ nav {
   background-color: #419c2a; }
 
 .photo {
-  padding-bottom: 20px; }
+  max-width: 200px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px; }
   .photo img {
-    max-width: 100%; }
+    width: 100%; }
 
 .large {
   font-size: large; }
@@ -6350,13 +6353,6 @@ nav {
 
 .btn-large {
   font-size: 1.3rem; }
-
-.imgcenter {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-  .imgcenter .smaller {
-    width: 70%; }
 
 #nav-mobile {
   width: 320px;

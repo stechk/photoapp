@@ -37,8 +37,8 @@
                 id="co-fotit">
                 {if $presenter->type != null}
                     <a href="{link Homepage:default, type => null, op => null}" class="done item">Co fotit&nbsp;<i
-                                class="material-icons tiny">done</i><span
-                                class="second-line">{$typeText}</span></a>
+                                class="material-icons tiny">done</i><span n:if="isset($type)"
+                                class="second-line">{$type["name"]}</span></a>
                 {else}
                     <a href="{link Homepage:default}">Co fotit</a>
                 {/if}
