@@ -13,12 +13,14 @@ $(document).ready(function () {
             document.location = $(that).attr("href");
         });
     })
-var interval;
-        $('#frm-uploadForm-upload').fileupload({
+    var interval;
+    var filestoupload = 0;
+
+    $('#frm-uploadForm-upload').fileupload({
         //url: $("#frm-form").attr("action"),
         dataType: 'text',
         imageMaxWidth: 1024,
-            imageMaxHeight: 1024,
+        imageMaxHeight: 1024,
         disableImageResize: false,
         imageForceResize: true,
         done: function (e, data) {
@@ -28,12 +30,17 @@ var interval;
                 if (activeUploads == 0) {
                     clearInterval(interval);
                     //reload window after successfull upload all files
-                    window.location.reload();
+                    // window.location.reload();
+                    var urlWithoutCount = String(window.location).replace(/&count=[0-9]+/i, '');
+                    console.log(urlWithoutCount);
+                    window.location.replace(urlWithoutCount + '&count=' + filestoupload);
                 }
-            },300);
+            }, 300);
         }
 
-
-    });
+    })
+        .bind('fileuploadadd', function (e, data) {
+            filestoupload++;
+        });
 
 });

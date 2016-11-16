@@ -5,10 +5,15 @@
             <span>Fotografie</span>
             {input upload}
         </div>
+
         <div class="file-path-wrapper">
             <input class="file-path validate" type="text">
         </div>
     </div>
+    {if !empty($countUploadedPhotos)}
+        <p class="center">Nahráli jste fotek: {$countUploadedPhotos}</p>
+    {/if}
+
     <div class="button-col center">
         {input submit, class=>"btn waves-effect waves-light btn-large"}
     </div>

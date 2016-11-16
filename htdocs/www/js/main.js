@@ -6,19 +6,24 @@ $(document).ready(function() {
             a.preventDefault(), $("#md1").closeModal(), document.location = $(b).attr("href");
         });
     });
-    var a;
+    var a, b = 0;
     $("#frm-uploadForm-upload").fileupload({
         dataType: "text",
         imageMaxWidth: 1024,
         imageMaxHeight: 1024,
         disableImageResize: !1,
         imageForceResize: !0,
-        done: function(b, c) {
+        done: function(c, d) {
             clearInterval(a), a = window.setInterval(function() {
-                var b = $("#frm-uploadForm-upload").fileupload("active");
-                0 == b && (clearInterval(a), window.location.reload());
+                var c = $("#frm-uploadForm-upload").fileupload("active");
+                if (0 == c) {
+                    clearInterval(a);
+                    var d = String(window.location).replace(/&count=[0-9]+/i, "");
+                    console.log(d), window.location.replace(d + "&count=" + b);
+                }
             }, 300);
         }
+    }).bind("fileuploadadd", function(a, c) {
+        b++;
     });
-    $('.materialboxed').materialbox();
 });

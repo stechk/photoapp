@@ -77,6 +77,7 @@ class HomepagePresenter extends BasePresenter
     public function renderPhotoform()
     {
         $this->template->photos = $this->photoModel->findPhotoByOp($this->op)->fetchAll();
+        $this->template->countUploadedPhotos = $this->getParameter('count');
     }
 
     protected function createComponentSearchForm()

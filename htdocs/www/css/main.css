@@ -6435,22 +6435,6 @@ label {
     position: relative;
     top: -7px; }
 
-#footer {
-  position: fixed;
-  left: 0px;
-  bottom: 0px;
-  height: 40px;
-  width: 100%;
-  background: #419c2a;
-  z-index: 10; }
-  #footer .footer-links {
-    text-align: center;
-    margin-top: 9px; }
-    #footer .footer-links a {
-      color: white; }
-    #footer .footer-links .logout-link {
-      margin-left: 20px; }
-
 .flash {
   text-align: center;
   font-weight: bold;
