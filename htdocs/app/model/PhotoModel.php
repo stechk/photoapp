@@ -9,12 +9,11 @@
 namespace Model;
 
 use Nette\Database\Connection;
-use Nette\Database\Context;
 
 class PhotoModel
 {
     /**
-     * @var Context
+     * @var Connection
      */
     private $database;
 
@@ -24,7 +23,7 @@ class PhotoModel
 
     /**
      * PhotoModel constructor.
-     * @param Context $database
+     * @param Connection $database
      */
     public function __construct(Connection $database)
     {
@@ -38,8 +37,7 @@ class PhotoModel
 
     public function saveImage($data)
     {
-        $this->database->query('INSERT INTO images (op, filepath, file_name, `timestamp`, `type`) 
-      VALUES (?, ?, ?, ?, ?)', $data['op'], $data['destination'], $data['file_name'], $data['timestamp'], $data['type']);
+        $this->database->query('INSERT INTO images', $data);
     }
 
 }

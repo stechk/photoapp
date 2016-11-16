@@ -62,7 +62,6 @@ class SoapService
 //        $parser = simplexml_load_string($response);
 //        $parser->asXML(__DIR__ . "/test-castcisla.xml");
 
-
         if (!$response) {
             return [];
         }
@@ -83,7 +82,6 @@ class SoapService
     /**
      * @param $xml_post_string
      * @param $method
-     * @param $soapUrl
      * @return mixed
      */
     private function callService($xml_post_string, $method)

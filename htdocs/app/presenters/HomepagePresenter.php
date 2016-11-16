@@ -32,22 +32,21 @@ class HomepagePresenter extends BasePresenter
 
     }
 
-    public function render()
-    {
-
-    }
     protected function beforeRender()
     {
         $files = $this->presenter->getHttpRequest()->getFiles();
         $post = $this->presenter->getHttpRequest()->getPost();
-        if (isset($this->type)){
-            if ($this->type == PhotoModel::TYPE_CONSTRUCT){
+        /**
+         * vypisovani typu do navbaru
+         */
+        if (isset($this->type)) {
+            if ($this->type == PhotoModel::TYPE_CONSTRUCT) {
                 $typeTemplate = 'Montáž';
             }
-            if ($this->type == PhotoModel::TYPE_MEASUREMENT){
+            if ($this->type == PhotoModel::TYPE_MEASUREMENT) {
                 $typeTemplate = 'Zaměření';
             }
-            if ($this->type == PhotoModel::TYPE_SERVICE){
+            if ($this->type == PhotoModel::TYPE_SERVICE) {
                 $typeTemplate = 'Servis';
             }
             $this->template->typeText = $typeTemplate;

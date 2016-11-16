@@ -6335,7 +6335,7 @@ nav {
   background-color: #419c2a; }
 
 .photo {
-  margin-bottom: 20px; }
+  padding-bottom: 20px; }
   .photo img {
     max-width: 100%; }
 
@@ -6362,6 +6362,8 @@ nav {
   width: 320px;
   margin-left: auto;
   margin-right: auto; }
+  #nav-mobile #co-fotit {
+    border-right: 1px solid rgba(0, 0, 0, 0.1); }
   #nav-mobile li {
     width: 33%;
     text-align: center; }
@@ -6378,31 +6380,16 @@ nav {
     #nav-mobile li .done {
       color: lightgrey; }
     #nav-mobile li .item {
-      margin-top: -10px;
-      padding-bottom: 10px;
+      margin-top: -13px;
+      padding-bottom: 13px;
       display: block;
       position: relative; }
     #nav-mobile li .second-line {
       position: absolute;
       width: 100%;
       left: 0;
-      top: 20px;
+      top: 26px;
       height: 30px; }
-
-.date {
-  display: block;
-  color: gray; }
-
-.approved {
-  color: green; }
-
-.canceled {
-  color: red; }
-
-.poznatky-list .collection-item {
-  padding-left: 0px; }
-  .poznatky-list .collection-item > .row {
-    margin-bottom: 0px; }
 
 .foto-links {
   width: 200px;
@@ -6414,14 +6401,6 @@ nav {
 #ops .larger {
   font-size: xx-large; }
 
-.rating {
-  font-weight: bold;
-  position: relative;
-  margin-left: -6px; }
-
-.detail .detail-item {
-  border-bottom: 1px solid #e0e0e0; }
-
 label {
   font-size: 1rem; }
 
@@ -6431,12 +6410,6 @@ label {
 .input-field label.active {
   font-size: 1rem;
   transform: translateY(-110%); }
-
-.checkbox-container label {
-  padding-left: 25px; }
-
-.mt10 {
-  margin-top: 10px; }
 
 .oplinks {
   width: 200px;
@@ -6462,14 +6435,6 @@ label {
     position: relative;
     top: -7px; }
 
-.detail-delete-link {
-  text-align: right;
-  position: relative; }
-  .detail-delete-link a {
-    position: absolute;
-    right: 0px;
-    top: -15px; }
-
 #footer {
   position: fixed;
   left: 0px;
@@ -6485,20 +6450,6 @@ label {
       color: white; }
     #footer .footer-links .logout-link {
       margin-left: 20px; }
-
-.my-stat-table th, .my-stat-table td {
-  width: 50%; }
-.my-stat-table th {
-  text-align: right; }
-.my-stat-table td {
-  text-align: left;
-  padding-left: 40px; }
-
-.detail-table th {
-  width: 160px; }
-  @media (min-width: 768px) {
-    .detail-table th {
-      width: 200px; } }
 
 .flash {
   text-align: center;

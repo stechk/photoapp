@@ -1,5 +1,5 @@
 {block content}
-{form uploadForm, class => 'mt20 m10'}
+{form uploadForm, class => 'm10'}
     <div class="file-field input-field">
         <div class="btn">
             <span>Fotografie</span>
@@ -12,8 +12,9 @@
     <div class="button-col center">
         {input submit, class=>"btn waves-effect waves-light btn-large"}
     </div>
+{/form}
 {ifset $photos}
-    <div n:if="count($photos) > 0" class="attachments">
+    <div class="attachments m10">
         <p class="large"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
         <p><strong>Montáž</strong></p>
         <ul>
@@ -37,13 +38,13 @@
         {foreach $photos as $a}
             {if $a->type == \Model\PhotoModel::TYPE_SERVICE}
                 {var $servis += 1}
-                    <ul>
-                        <div class="imgcenter smaller">
-                            <li class="photo">
-                                <img class="materialboxed" src="{$a->filepath}">
-                            </li>
-                        </div>
-                    </ul>
+                <ul>
+                    <div class="imgcenter smaller">
+                        <li class="photo">
+                            <img class="materialboxed" src="{$a->filepath}">
+                        </li>
+                    </div>
+                </ul>
             {/if}
         {/foreach}
         {if empty($servis)}<p>Žádné fotografie ze servisu nenalezeny</p>{/if}
@@ -53,18 +54,17 @@
         {foreach $photos as $a}
             {if $a->type == \Model\PhotoModel::TYPE_MEASUREMENT}
                 {var $zamereni =+ 1}
-                    <ul>
-                        <div class="imgcenter smaller">
-                            <li class="photo">
-                                <img class="materialboxed" src="{$a->filepath}">
-                            </li>
-                        </div>
-                    </ul>
+                <ul>
+                    <div class="imgcenter smaller">
+                        <li class="photo">
+                            <img class="materialboxed" src="{$a->filepath}">
+                        </li>
+                    </div>
+                </ul>
             {/if}
         {/foreach}
         {if empty($zamereni)}<p>Žádné fotografie ze zaměření nenalezeny</p>{/if}
-
-        {dump $photos}
     </div>
 {/ifset}
-{/form}
+{/block}
+

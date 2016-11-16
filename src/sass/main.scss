@@ -5,7 +5,7 @@ $btnColor: #F44336;
 
 body {
   margin-bottom: 40px;
-  h1{
+  h1 {
     font-size: 3.2rem;
   }
 }
@@ -15,11 +15,12 @@ nav {
 }
 
 .photo {
-  margin-bottom: 20px;
+  padding-bottom: 20px;
   img {
     max-width: 100%;
   }
 }
+
 .large {
   font-size: large;
 }
@@ -49,6 +50,9 @@ nav {
   width: 320px;
   margin-left: auto;
   margin-right: auto;
+  #co-fotit {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
   li {
     width: 33%;
     text-align: center;
@@ -72,8 +76,8 @@ nav {
       color: lightgrey;
     }
     .item {
-      margin-top: -10px;
-      padding-bottom: 10px;
+      margin-top: -13px;
+      padding-bottom: 13px;
       display: block;
       position: relative;
     }
@@ -81,32 +85,9 @@ nav {
       position: absolute;
       width: 100%;
       left: 0;
-      top: 20px;
+      top: 26px;
       height: 30px;
     }
-  }
-}
-
-.date {
-  display: block;
-  color: gray;
-}
-
-.approved {
-  color: green;
-}
-
-.canceled {
-  color: red;
-}
-
-.poznatky-list {
-  .collection-item {
-    padding-left: 0px;
-    > .row {
-      margin-bottom: 0px
-    }
-
   }
 }
 
@@ -121,20 +102,6 @@ nav {
 #ops {
   .larger {
     font-size: xx-large;
-    //text-align: center;
-    //padding: 20px 10px 20px 10px;
-  }
-}
-
-.rating {
-  font-weight: bold;
-  position: relative;
-  margin-left: -6px;
-}
-
-.detail {
-  .detail-item {
-    border-bottom: 1px solid #e0e0e0;
   }
 }
 
@@ -149,16 +116,6 @@ label {
 .input-field label.active {
   font-size: 1rem;
   transform: translateY(-110%);
-}
-
-.checkbox-container {
-  label {
-    padding-left: 25px;
-  }
-}
-
-.mt10 {
-  margin-top: 10px;
 }
 
 .oplinks {
@@ -194,16 +151,6 @@ label {
   }
 }
 
-.detail-delete-link {
-  text-align: right;
-  position: relative;
-  a {
-    position: absolute;
-    right: 0px;
-    top: -15px;
-  }
-}
-
 #footer {
   position: fixed;
   left: 0px;
@@ -221,30 +168,6 @@ label {
     .logout-link {
       margin-left: 20px;
     }
-  }
-}
-
-.my-stat-table {
-  th, td {
-    width: 50%;
-  }
-  th {
-    text-align: right;
-  }
-  td {
-    text-align: left;
-    padding-left: 40px;
-  }
-  //max-width: 400px;
-}
-
-.detail-table {
-  th {
-    width: 160px;
-    @media (min-width: 768px) {
-      width: 200px;
-    }
-
   }
 }
 
@@ -268,8 +191,8 @@ label {
       }
     }
   }
-  body{
-    h1{
+  body {
+    h1 {
       font-size: 2.2rem;
     }
   }

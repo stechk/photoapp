@@ -34,7 +34,7 @@
     <nav>
         <div class="nav-wrapper">
             <ul id="nav-mobile">
-                <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, $presenter->type != null ? checked">
+                <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, $presenter->type != null ? checked" id="co-fotit">
                     {if $presenter->type != null}
                         <a href="{link Homepage:default, type => null, op => null}" class="done item">Co fotit&nbsp;<i
                                     class="material-icons tiny">done</i><span
@@ -64,9 +64,9 @@
     </nav>
 </div>
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-
+<div class="container">
 {include content}
-
+</div>
 <footer id="footer">
 </footer>
 {block scripts}
