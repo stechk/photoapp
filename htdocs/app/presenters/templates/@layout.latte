@@ -30,40 +30,39 @@
     <meta name="msapplication-config" content="{$basePath}/images/browserconfig.xml"/>
 </head>
 <body>
-{if $presenter->name !== 'Error'}
-    <nav>
-        <div class="nav-wrapper">
-            <ul id="nav-mobile">
-                <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, $presenter->type != null ? checked"
-                    id="co-fotit">
-                    {if $presenter->type != null}
-                        <a href="{link Homepage:default, type => null, op => null}" class="done item">Co fotit&nbsp;<i
-                                    class="material-icons tiny">done</i><span n:if="isset($type)"
-                                                                              class="second-line">{$type["name"]}</span></a>
-                    {else}
-                        <a href="{link Homepage:default}">Co fotit</a>
-                    {/if}
-                </li>
-                <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, $presenter->op != null && $presenter->type != null ? checked">
-                    {if $presenter->type != null && $presenter->op != null}
-                        <a href="{link Homepage:op, op => null}" class="done item">Výběr OP&nbsp;<i
-                                    class="material-icons tiny">done</i>
-                            <span class="second-line">{$presenter->op}</span></a>
-                    {else}
-                        <span>Výběr OP</span>
-                    {/if}
-                </li>
-                <li n:class="$presenter->isLinkCurrent('Homepage:photoform') ? active">
-                    {if $presenter->type != null && $presenter->op != null}
-                        <a href="{link Homepage:photoform}">Foť</a>
-                    {else}
-                        <span>Foť</span>
-                    {/if}
-                </li>
-            </ul>
-        </div>
-    </nav>
-{/if}
+<nav>
+    <div class="nav-wrapper">
+        <ul id="nav-mobile">
+            <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, isset($type) ? checked"
+                id="co-fotit">
+                {if isset($type)}
+                    <a href="{link Homepage:default, type => null, op => null}" class="done item">Co fotit&nbsp;<i
+                                class="material-icons tiny">done</i><span n:if="isset($type)"
+                                                                          class="second-line">{$type["name"]}</span></a>
+                {else}
+                    <a href="{link Homepage:default}">Co fotit</a>
+                {/if}
+            </li>
+            <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, $presenter->op != null && isset($type) ? checked">
+                {if isset($type) && $presenter->op != null}
+                    <a href="{link Homepage:op, op => null}" class="done item">Výběr OP&nbsp;<i
+                                class="material-icons tiny">done</i>
+                        <span class="second-line">{$presenter->op}</span></a>
+                {else}
+                    <span>Výběr OP</span>
+                {/if}
+            </li>
+            <li n:class="$presenter->isLinkCurrent('Homepage:photoform') ? active">
+                {if isset($type) && $presenter->op != null}
+                    <a href="{link Homepage:photoform}">Foť</a>
+                {else}
+                    <span>Foť</span>
+                {/if}
+            </li>
+        </ul>
+    </div>
+</nav>
+{dump $type}
 
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 <div class="container">
