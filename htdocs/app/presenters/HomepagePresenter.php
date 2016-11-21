@@ -44,6 +44,7 @@ class HomepagePresenter extends BasePresenter
         }
 
         $this->template->type = $this->photoModel->getTypeByName($this->type);
+        $this->template->op = $this->op;
 
 
         if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit") {
