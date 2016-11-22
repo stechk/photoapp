@@ -6443,7 +6443,7 @@ label {
 
 @media (max-width: 480px) {
   #nav-mobile li a, #nav-mobile li span {
-    font-size: smaller; }
+    font-size: small; }
 
   body h1 {
     font-size: 2.2rem; } }
