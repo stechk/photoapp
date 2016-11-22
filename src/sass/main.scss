@@ -16,7 +16,7 @@ nav {
 
 .photo {
 
-  max-width: 200px;
+  max-width: 140px;
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;
@@ -65,7 +65,7 @@ nav {
     }
     i {
       display: inline-block;
-      font-size: 1rem;
+      font-size: 0.5rem;
       color: white;
     }
     .done {
@@ -163,7 +163,7 @@ label {
   #nav-mobile {
     li {
       a, span {
-        font-size: small;
+        font-size: x-small;
       }
     }
   }

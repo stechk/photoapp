@@ -33,23 +33,22 @@
 <nav>
     <div class="nav-wrapper">
         <ul id="nav-mobile">
-            <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, isset($type) ? checked"
-                id="co-fotit">
+            <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, isset($type) ? checked" id="co-fotit">
                 {if isset($type)}
-                    <a href="{link Homepage:default, type => null, op => null}" class="done item">Co fotit&nbsp;<i
+                    <a href="{link Homepage:default, type => null, op => null}" class="done item">Co chceš fotit&nbsp;<i
                                 class="material-icons tiny">done</i><span n:if="isset($type)"
                                                                           class="second-line">{$type["name"]}</span></a>
                 {else}
-                    <a href="{link Homepage:default}">Co fotit</a>
+                    <a href="{link Homepage:default}">Co chceš fotit</a>
                 {/if}
             </li>
             <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, isset($op) && isset($type) ? checked">
                 {if isset($type) && isset($op)}
-                    <a href="{link Homepage:op, op => null}" class="done item">Výběr OP&nbsp;<i
+                    <a href="{link Homepage:op, op => null}" class="done item">Vyber OP&nbsp;<i
                                 class="material-icons tiny">done</i>
                         <span class="second-line">{$op}</span></a>
                 {else}
-                    <span>Výběr OP</span>
+                    <span>Vyber OP</span>
                 {/if}
             </li>
             <li n:class="$presenter->isLinkCurrent('Homepage:photoform') ? active">

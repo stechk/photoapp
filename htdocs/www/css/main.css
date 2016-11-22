@@ -6335,7 +6335,7 @@ nav {
   background-color: #419c2a; }
 
 .photo {
-  max-width: 200px;
+  max-width: 140px;
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px; }
@@ -6371,7 +6371,7 @@ nav {
       font-size: 1.3rem; }
     #nav-mobile li i {
       display: inline-block;
-      font-size: 1rem;
+      font-size: 0.5rem;
       color: white; }
     #nav-mobile li .done {
       color: lightgrey; }
@@ -6442,7 +6442,7 @@ label {
 
 @media (max-width: 480px) {
   #nav-mobile li a, #nav-mobile li span {
-    font-size: small; }
+    font-size: x-small; }
 
   body h1 {
     font-size: 2.2rem; } }
