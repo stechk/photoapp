@@ -60,12 +60,13 @@ nav {
     }
     a, span {
       font-size: 1.3rem;
+      padding: inherit;
       //position: relative;
       //margin-top: -10px;
     }
     i {
       display: inline-block;
-      font-size: 0.5rem;
+      font-size: 0.75rem;
       color: white;
     }
     .done {
@@ -163,7 +164,7 @@ label {
   #nav-mobile {
     li {
       a, span {
-        font-size: x-small;
+        font-size: smaller;
       }
     }
   }

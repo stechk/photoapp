@@ -6368,10 +6368,11 @@ nav {
     #nav-mobile li.checked {
       background-color: rgba(0, 0, 0, 0.1); }
     #nav-mobile li a, #nav-mobile li span {
-      font-size: 1.3rem; }
+      font-size: 1.3rem;
+      padding: inherit; }
     #nav-mobile li i {
       display: inline-block;
-      font-size: 0.5rem;
+      font-size: 0.75rem;
       color: white; }
     #nav-mobile li .done {
       color: lightgrey; }
@@ -6442,7 +6443,7 @@ label {
 
 @media (max-width: 480px) {
   #nav-mobile li a, #nav-mobile li span {
-    font-size: x-small; }
+    font-size: smaller; }
 
   body h1 {
     font-size: 2.2rem; } }
