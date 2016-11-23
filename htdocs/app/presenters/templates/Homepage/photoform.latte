@@ -2,7 +2,7 @@
     {form uploadForm, class => 'm10'}
         <div class="file-field input-field">
             <div class="btn">
-                <span>Fotografie</span>
+                <span>Přidat fotku</span>
                 {input upload}
             </div>
 
@@ -13,10 +13,8 @@
     {if !empty($countUploadedPhotos)}
         <p class="center">Počet nahraných fotek: {$countUploadedPhotos}</p>
     {/if}
-        <div class="button-col center">
-            {input submit, class=>"btn waves-effect waves-light btn-large"}
-        </div>
-    {/form}
+
+
     {ifset $photos}
         <div class="attachments m10">
             <p class="large"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
@@ -64,5 +62,9 @@
             {if empty($zamereni)}<p>Žádné fotografie ze zaměření nenalezeny</p>{/if}
         </div>
     {/ifset}
+        <div class="button-col center">
+            {input submit, class=>"btn waves-effect waves-light btn-large"}
+        </div>
+    {/form}
 {/block}
 

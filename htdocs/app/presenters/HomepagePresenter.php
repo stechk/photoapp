@@ -78,10 +78,10 @@ class HomepagePresenter extends BasePresenter
     protected function createComponentSearchForm()
     {
         $form = new Nette\Application\UI\Form();
-        $form->addText('op', 'Hledej OP')
+        $form->addText('op', 'Zadej číslo OP')
             ->addRule(Nette\Application\UI\Form::INTEGER, 'OP musí být číslo')
             ->setRequired('Zadejte OP');
-        $form->addSubmit('search', 'Hledat');
+        $form->addSubmit('search', 'Vyhledat');
         $form->onSuccess[] = [$this, 'searchFormSubmitted'];
         return $form;
 
@@ -105,7 +105,7 @@ class HomepagePresenter extends BasePresenter
             ->setRequired(FALSE)
             ->setAttribute('accept', 'image/*')
             ->addRule(Nette\Application\UI\Form::IMAGE, 'Formát jednoho nebo více obrázků není podporován.');
-        $form->addSubmit('submit', 'Ukončit')->onClick[] = [$this, 'uploadFormSubmitted'];
+        $form->addSubmit('submit', 'Ukončit focení')->onClick[] = [$this, 'uploadFormSubmitted'];
         return $form;
     }
 

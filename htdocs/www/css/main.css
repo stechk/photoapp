@@ -6334,6 +6334,17 @@ body {
 nav {
   background-color: #419c2a; }
 
+#frm-uploadForm .file-field {
+  margin-top: 2rem; }
+  #frm-uploadForm .file-field .btn, #frm-uploadForm .file-field .btn-large {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    width: 230px; }
+#frm-uploadForm .file-path-wrapper .validate {
+  border-bottom: none; }
+
 .photo {
   max-width: 140px;
   display: inline-block;
@@ -6347,9 +6358,6 @@ nav {
 
 .btn, .btn-large {
   background-color: #419c2a; }
-
-.searchForm {
-  border-bottom: 1px solid #c7c7c7; }
 
 .btn-large {
   font-size: 1.3rem; }
@@ -6412,7 +6420,8 @@ label {
   width: 200px;
   margin-left: auto;
   margin-right: auto;
-  display: table; }
+  display: table;
+  border-top: 1px solid #c7c7c7; }
 
 .mt20 {
   margin-top: 20px; }
@@ -6431,6 +6440,9 @@ label {
   .attachments li .preview-img {
     position: relative;
     top: -7px; }
+
+.logo {
+  padding-top: 50px; }
 
 .flash {
   text-align: center;

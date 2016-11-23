@@ -14,6 +14,24 @@ nav {
   background-color: $albixonGreenColor;
 }
 
+#frm-uploadForm{
+  .file-field{
+    margin-top: 2rem;
+    .btn{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      float: none;
+      width: 230px;
+    }
+  }
+  .file-path-wrapper{
+    .validate{
+      border-bottom: none;
+    }
+  }
+}
+
 .photo {
 
   max-width: 140px;
@@ -31,10 +49,6 @@ nav {
 
 .btn {
   background-color: $albixonGreenColor;
-}
-
-.searchForm {
-  border-bottom: 1px solid #c7c7c7;
 }
 
 .btn-large {
@@ -120,6 +134,7 @@ label {
   margin-left: auto;
   margin-right: auto;
   display: table;
+  border-top: 1px solid #c7c7c7;
 }
 
 .mt20 {
@@ -146,6 +161,9 @@ label {
       top: -7px;
     }
   }
+}
+.logo{
+  padding-top: 50px;
 }
 
 .flash {
