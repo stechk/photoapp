@@ -60,6 +60,19 @@
                 {/foreach}
             </ul>
             {if empty($zamereni)}<p>Žádné fotografie ze zaměření nenalezeny</p>{/if}
+            <p><strong>Expedice</strong></p>
+            <ul>
+                {var $expedice = 0}
+                {foreach $photos as $a}
+                    {if $a->type == \Model\PhotoModel::TYPE_EXPEDITION}
+                        {var $expedice += 1}
+                        <li class="photo">
+                            <img class="materialboxed" src="{$a->filepath}">
+                        </li>
+                    {/if}
+                {/foreach}
+            </ul>
+            {if empty($expedice)}<p>Žádné fotografie z expedice nenalezeny</p>{/if}
         </div>
     {/ifset}
         <div class="button-col center">

@@ -20,6 +20,7 @@ class PhotoModel
     const TYPE_MEASUREMENT = 'zamereni';
     const TYPE_CONSTRUCT = 'montaz';
     const TYPE_SERVICE = 'servis';
+    const TYPE_EXPEDITION = 'expedice';
 
     /**
      * Allowed types
@@ -29,6 +30,7 @@ class PhotoModel
         ["id" =>self::TYPE_CONSTRUCT, "name" => "Montáž"],
         ["id" =>self::TYPE_SERVICE, "name" => "Servis"],
         ["id" =>self::TYPE_MEASUREMENT, "name" => "Zaměření"],
+        ["id" =>self::TYPE_EXPEDITION, "name" => "Expedice"],
     ];
 
     /**
