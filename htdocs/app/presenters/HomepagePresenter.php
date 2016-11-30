@@ -53,8 +53,9 @@ class HomepagePresenter extends BasePresenter
                 //ulozeni souboru z formulare
                 /** @var Nette\Http\FileUpload $file */
                 $file = $files["upload"][0];
-                $dest = $filespath . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . rand(100, 999) . '-' . $file->getSanitizedName();
-                $destView = "/files" . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . rand(100, 999) . '-' . $file->getSanitizedName();
+                $rand =  rand(100, 999);
+                $dest = $filespath . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand. '-' . $file->getSanitizedName();
+                $destView = "/files" . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' .$rand . '-' . $file->getSanitizedName();
                 $file->move($dest);
                 //test razeni dle datumu
 //                $date = new Nette\Utils\DateTime();
