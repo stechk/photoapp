@@ -6353,8 +6353,11 @@ nav {
   .photo img {
     width: 100%; }
 
-.large {
-  font-size: large; }
+.xlarge {
+  font-size: x-large; }
+
+.type {
+  font-size: larger; }
 
 .btn, .btn-large {
   background-color: #419c2a; }

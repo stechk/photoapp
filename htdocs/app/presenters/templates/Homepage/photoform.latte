@@ -14,65 +14,49 @@
         <p class="center">Počet nahraných fotek: {$countUploadedPhotos}</p>
     {/if}
 
-
+    {dump $photos}
     {ifset $photos}
         <div class="attachments m10">
-            <p class="large"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
-            <p><strong>Montáž</strong></p>
-            <ul>
-                {var $montaz = 0}
-                {foreach $photos as $a}
-                    {if $a->type == \Model\PhotoModel::TYPE_CONSTRUCT}
-                        {var $montaz += 1}
-                        <li class="photo">
-                            <img class="materialboxed" src="{$a->filepath}">
-                        </li>
-                    {/if}
-                {/foreach}
-            </ul>
-            {if empty($montaz)}<p>Žádné fotografie z montáže nenalezeny</p>{/if}
+            <p class="xlarge"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
 
-            <p><strong>Servis</strong></p>
-
-            {var $servis = 0}
-            <ul>
-                {foreach $photos as $a}
-                    {if $a->type == \Model\PhotoModel::TYPE_SERVICE}
-                        {var $servis += 1}
-                        <li class="photo">
-                            <img class="materialboxed" src="{$a->filepath}">
-                        </li>
-                    {/if}
-                {/foreach}
-            </ul>
-            {if empty($servis)}<p>Žádné fotografie ze servisu nenalezeny</p>{/if}
-            <p><strong>Zaměření</strong></p>
-
-            {var $zamereni = 0}
-            <ul>
-                {foreach $photos as $a}
-                    {if $a->type == \Model\PhotoModel::TYPE_MEASUREMENT}
-                        {var $zamereni =+ 1}
-                        <li class="photo">
-                            <img class="materialboxed" src="{$a->filepath}">
-                        </li>
-                    {/if}
-                {/foreach}
-            </ul>
-            {if empty($zamereni)}<p>Žádné fotografie ze zaměření nenalezeny</p>{/if}
-            <p><strong>Expedice</strong></p>
-            <ul>
-                {var $expedice = 0}
-                {foreach $photos as $a}
-                    {if $a->type == \Model\PhotoModel::TYPE_EXPEDITION}
-                        {var $expedice += 1}
-                        <li class="photo">
-                            <img class="materialboxed" src="{$a->filepath}">
-                        </li>
-                    {/if}
-                {/foreach}
-            </ul>
-            {if empty($expedice)}<p>Žádné fotografie z expedice nenalezeny</p>{/if}
+            {foreach $photos as $typeName => $dates}
+                {if $typeName == \Model\PhotoModel::TYPE_CONSTRUCT}
+                    <p class="type"><strong>Montáž</strong></p>
+                {elseif $typeName == \Model\PhotoModel::TYPE_SERVICE}
+                    <p class="type"><strong>Servis</strong></p>
+                {elseif $typeName == \Model\PhotoModel::TYPE_MEASUREMENT}
+                    <p class="type"><strong>Zaměřování</strong></p>
+                {elseif $typeName == \Model\PhotoModel::TYPE_EXPEDITION}
+                    <p class="type"><strong>Expedice</strong></p>
+                {/if}
+                <ul>
+                    {foreach $dates as $date => $photosByDate}
+                        <p><strong>{$date|date:'%d.%m.%Y'}</strong></p>
+                        <br>
+                        {foreach $photosByDate as $id => $photoData}
+                            <li class="photo">
+                                <img class="materialboxed" src="{$photoData['filepath']}">
+                            </li>
+                        {/foreach}
+                    {/foreach}
+                </ul>
+            {/foreach}
+            {if !isset($photos['zamereni'])}
+                <p><strong>Zaměření</strong></p>
+                <p>Žádné fotografie ze zaměřování nenalezeny</p>
+            {/if}
+            {if !isset($photos['servis'])}
+                <p><strong>Servis</strong></p>
+                <p>Žádné fotografie ze servisu nenalezeny</p>
+            {/if}
+            {if !isset($photos['montaz'])}
+                <p><strong>Montáž</strong></p>
+                <p>Žádné fotografie z montáže nenalezeny</p>
+            {/if}
+            {if !isset($photos['expedice'])}
+                <p><strong>Expedice</strong></p>
+                <p>Žádné fotografie z expedice nenalezeny</p>
+            {/if}
         </div>
     {/ifset}
         <div class="button-col center">

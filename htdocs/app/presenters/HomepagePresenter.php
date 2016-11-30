@@ -53,14 +53,18 @@ class HomepagePresenter extends BasePresenter
                 //ulozeni souboru z formulare
                 /** @var Nette\Http\FileUpload $file */
                 $file = $files["upload"][0];
-                $dest = $filespath . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . $file->getSanitizedName();
-                $destView = "/files" . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . $file->getSanitizedName();
+                $dest = $filespath . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . rand(100, 999) . '-' . $file->getSanitizedName();
+                $destView = "/files" . "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . rand(100, 999) . '-' . $file->getSanitizedName();
                 $file->move($dest);
+                //test razeni dle datumu
+//                $date = new Nette\Utils\DateTime();
+//                $date->add(\DateInterval::createFromDateString('yesterday'));
                 $saveData = [
                     'filepath' => $destView,
                     'file_name' => $file->getSanitizedName(),
                     'op' => $this->op,
                     'type' => $this->type,
+//                    'timestamp' => $date
                     'timestamp' => new Nette\Utils\DateTime()
                 ];
                 $this->photoModel->saveImage($saveData);
@@ -71,7 +75,7 @@ class HomepagePresenter extends BasePresenter
 
     public function renderPhotoform()
     {
-        $this->template->photos = $this->photoModel->findPhotoByOp($this->op)->fetchAll();
+        $this->template->photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
         $this->template->countUploadedPhotos = $this->getParameter('count');
     }
 
