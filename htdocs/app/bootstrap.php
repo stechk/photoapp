@@ -18,6 +18,7 @@ $configurator->createRobotLoader()
 
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
+new \Albixon\HttpAuth();
 
 $container = $configurator->createContainer();
 
