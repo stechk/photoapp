@@ -29,7 +29,7 @@ class HttpAuth extends \Nette\Object
 //        var_dump($_SERVER['PHP_AUTH_PW']);
 
         if (php_sapi_name() != "cli") {
-            if ($this->isIpInAllowedRanges($this->getIpAddress())!==true) {
+            if ($this->isIpInAllowedRanges($this->getIpAddress()) !== true) {
                 if ((!isset($_SERVER['PHP_AUTH_USER']) || !isset($this->credentials[$_SERVER['PHP_AUTH_USER']]) || $_SERVER['PHP_AUTH_PW'] !== $this->credentials[$_SERVER['PHP_AUTH_USER']])
                     && isset($_GET['albixon'])
                 ) {
@@ -52,10 +52,9 @@ class HttpAuth extends \Nette\Object
      *
      * @return string
      */
-    private function getIpAddress() {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            return $_SERVER['HTTP_CLIENT_IP'];
-        } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    private function getIpAddress()
+    {
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             return trim(reset($ips));
         } else {
