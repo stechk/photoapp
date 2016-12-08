@@ -33,13 +33,15 @@
 <nav>
     <div class="nav-wrapper">
         <ul id="nav-mobile">
-            <li n:class="$presenter->isLinkCurrent('Homepage:default') ? active, isset($type) ? checked" id="co-fotit">
+            {*|| $presenter->isLinkCurrent("Homepage:notDefault")*}
+            <li n:class='$presenter->isLinkCurrent("Homepage:$actionByUrl") ? active, isset($type) ? checked' id="co-fotit">
                 {if isset($type)}
-                    <a href="{link Homepage:default, type => null, op => null}" class="done item">Co chceš fotit&nbsp;<i
+                    <a href="{link Homepage:$actionByUrl, type => null, op => null}" class="done item">Co chceš fotit&nbsp;<i
                                 class="material-icons tiny">done</i><span n:if="isset($type)"
                                                                           class="second-line">{$type["name"]}</span></a>
+
                 {else}
-                    <a href="{link Homepage:default}">Co chceš fotit</a>
+                    <a href="{link Homepage:$actionByUrl}">Co chceš fotit</a>
                 {/if}
             </li>
             <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, isset($op) && isset($type) ? checked">

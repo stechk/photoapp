@@ -17,6 +17,15 @@ class PhotoModel
      */
     private $database;
 
+    //TODO zmenit url a typy
+    const INNER_URL = 'http://fotoapp.local';
+    const OUTER_URL = 'http://fotoapp2.local';
+
+    public static $urlsToActions = [
+        self::INNER_URL => 'default',
+        self::OUTER_URL => 'notDefault'
+    ];
+
     const TYPE_MEASUREMENT = 'zamereni';
     const TYPE_CONSTRUCT = 'montaz';
     const TYPE_SERVICE = 'servis';
@@ -26,12 +35,14 @@ class PhotoModel
      * Allowed types
      * @var array
      */
-    private $types = [
-        ["id" =>self::TYPE_CONSTRUCT, "name" => "Montáž"],
-        ["id" =>self::TYPE_SERVICE, "name" => "Servis"],
-        ["id" =>self::TYPE_MEASUREMENT, "name" => "Zaměření"],
-        ["id" =>self::TYPE_EXPEDITION, "name" => "Expedice"],
+    private $allowedTypesByUrl = [self::INNER_URL => [
+        ["id" => self::TYPE_CONSTRUCT, "name" => "Montáž"],
+        ["id" => self::TYPE_SERVICE, "name" => "Servis"],
+        ["id" => self::TYPE_MEASUREMENT, "name" => "Zaměření"],
+        ],
+        self::OUTER_URL => [["id" => self::TYPE_EXPEDITION, "name" => "Expedice"],]
     ];
+
 
     /**
      * PhotoModel constructor.
@@ -46,11 +57,15 @@ class PhotoModel
      * @param $type
      * @return bool
      */
-    public function isAllowedParameter($type)
+    public function isAllowedParameter($type, $url)
     {
-        foreach ($this->types as $item) {
-            if ($item["id"] == $type) {
-                return true;
+        foreach ($this->allowedTypesByUrl as $allowedUrl => $allowedTypes) {
+            if ($url == $allowedUrl){
+                foreach ($allowedTypes as $item){
+                    if ($item["id"] == $type) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -60,11 +75,15 @@ class PhotoModel
      * @param $type
      * @return mixed
      */
-    public function getTypeByName($type)
+    public function getTypeByName($type, $url)
     {
-        foreach ($this->types as $item) {
-            if ($item["id"] == $type) {
-                return $item;
+        foreach ($this->allowedTypesByUrl as $allowedUrl => $allowedTypes) {
+            if ($url == $allowedUrl){
+                foreach ($allowedTypes as $item){
+                    if ($item["id"] == $type) {
+                        return $item;
+                    }
+                }
             }
         }
     }
@@ -75,7 +94,7 @@ class PhotoModel
      */
     public function findPhotoByOp($op)
     {
-       return $this->database->query('SELECT i.*, DATE_FORMAT(i.timestamp, "%Y-%m-%d") AS formatted_date 
+        return $this->database->query('SELECT i.*, DATE_FORMAT(i.timestamp, "%Y-%m-%d") AS formatted_date 
                                         FROM images as i WHERE i.op = ?', $op);
 
     }

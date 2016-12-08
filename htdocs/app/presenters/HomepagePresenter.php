@@ -36,14 +36,15 @@ class HomepagePresenter extends BasePresenter
     {
         $files = $this->presenter->getHttpRequest()->getFiles();
         $post = $this->presenter->getHttpRequest()->getPost();
+        $url = $this->presenter->getHttpRequest()->getUrl()->getHostUrl();
 
-        if (!$this->photoModel->isAllowedParameter($this->type) && $this->type != null) {
+        if (!$this->photoModel->isAllowedParameter($this->type, $url) && $this->type != null) {
             $this->type = null;
             $this->op = null;
-            $this->redirect("Homepage:default");
+            $this->redirect("Homepage:".PhotoModel::$urlsToActions[$url]);
         }
-
-        $this->template->type = $this->photoModel->getTypeByName($this->type);
+        $this->template->actionByUrl = PhotoModel::$urlsToActions[$url];
+        $this->template->type = $this->photoModel->getTypeByName($this->type, $url);
         $this->template->op = $this->op;
 
 
@@ -117,6 +118,6 @@ class HomepagePresenter extends BasePresenter
 
     public function uploadFormSubmitted(Nette\Forms\Controls\SubmitButton $button)
     {
-        $this->redirect('Homepage:default', array('type' => null, 'op' => null));
+        $this->redirect('Homepage:'.PhotoModel::$urlsToActions[$this->presenter->getHttpRequest()->getUrl()->getHostUrl()], array('type' => null, 'op' => null));
     }
 }
