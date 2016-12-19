@@ -12,45 +12,58 @@ use Nette\Database\Connection;
 
 class PhotoModel
 {
-    /**
-     * @var Connection
-     */
-    private $database;
-
-    //TODO zmenit url a typy
-    const INNER_URL = 'http://fotoapp.local';
-    const OUTER_URL = 'http://fotoapp2.local';
-
-    public static $urlsToActions = [
-        self::INNER_URL => 'default',
-        self::OUTER_URL => 'notDefault'
-    ];
 
     const TYPE_MEASUREMENT = 'zamereni';
     const TYPE_CONSTRUCT = 'montaz';
     const TYPE_SERVICE = 'servis';
     const TYPE_EXPEDITION = 'expedice';
 
+    private $domainInternal;
+    private $domainExternal;
+
     /**
-     * Allowed types
+     * @var Connection
+     */
+    private $database;
+
+    /**
+     * Povolene kategorie (typy) fotek dle domeny
      * @var array
      */
-    private $allowedTypesByUrl = [self::INNER_URL => [
-        ["id" => self::TYPE_CONSTRUCT, "name" => "Montáž"],
-        ["id" => self::TYPE_SERVICE, "name" => "Servis"],
-        ["id" => self::TYPE_MEASUREMENT, "name" => "Zaměření"],
-        ],
-        self::OUTER_URL => [["id" => self::TYPE_EXPEDITION, "name" => "Expedice"],]
-    ];
+    private $allowedTypesByUrl;
 
 
     /**
      * PhotoModel constructor.
      * @param Connection $database
      */
-    public function __construct(Connection $database)
+    public function __construct(Connection $database, $domainInternal, $domainExternal)
     {
         $this->database = $database;
+        $this->domainInternal = $domainInternal;
+        $this->domainExternal = $domainExternal;
+
+        $this->allowedTypesByUrl = [
+            $this->domainInternal["domain"] => [
+                ["id" => self::TYPE_CONSTRUCT, "name" => "Montáž"],
+                ["id" => self::TYPE_SERVICE, "name" => "Servis"],
+                ["id" => self::TYPE_MEASUREMENT, "name" => "Zaměření"],
+            ],
+            $this->domainExternal["domain"] => [
+                ["id" => self::TYPE_EXPEDITION, "name" => "Expedice"],
+            ]
+        ];
+    }
+
+
+    public function getDomainAction($domain)
+    {
+        $domain = str_replace("http://", "", $domain);
+        if ($domain == $this->domainExternal["domain"]) {
+            return $this->domainExternal["action"];
+        } elseif ($domain == $this->domainInternal["domain"]) {
+            return $this->domainInternal["action"];
+        }
     }
 
     /**
@@ -60,8 +73,8 @@ class PhotoModel
     public function isAllowedParameter($type, $url)
     {
         foreach ($this->allowedTypesByUrl as $allowedUrl => $allowedTypes) {
-            if ($url == $allowedUrl){
-                foreach ($allowedTypes as $item){
+            if (str_replace("http://", "", $url) == $allowedUrl) {
+                foreach ($allowedTypes as $item) {
                     if ($item["id"] == $type) {
                         return true;
                     }
@@ -78,8 +91,8 @@ class PhotoModel
     public function getTypeByName($type, $url)
     {
         foreach ($this->allowedTypesByUrl as $allowedUrl => $allowedTypes) {
-            if ($url == $allowedUrl){
-                foreach ($allowedTypes as $item){
+            if ($url == $allowedUrl) {
+                foreach ($allowedTypes as $item) {
                     if ($item["id"] == $type) {
                         return $item;
                     }

@@ -41,9 +41,9 @@ class HomepagePresenter extends BasePresenter
         if (!$this->photoModel->isAllowedParameter($this->type, $url) && $this->type != null) {
             $this->type = null;
             $this->op = null;
-            $this->redirect("Homepage:".PhotoModel::$urlsToActions[$url]);
+            $this->redirect("Homepage:".$this->photoModel->getDomainAction($url));
         }
-        $this->template->actionByUrl = PhotoModel::$urlsToActions[$url];
+        $this->template->actionByUrl = $this->photoModel->getDomainAction($url);
         $this->template->type = $this->photoModel->getTypeByName($this->type, $url);
         $this->template->op = $this->op;
 
@@ -59,9 +59,7 @@ class HomepagePresenter extends BasePresenter
                 $dest = $filespath . $sharedPath;
                 $destView = "/files" . $sharedPath;
                 $file->move($dest);
-                //test razeni dle datumu
-//                $date = new Nette\Utils\DateTime();
-//                $date->add(\DateInterval::createFromDateString('yesterday'));
+
                 $saveData = [
                     'filepath' => $destView,
                     'file_name' => $file->getSanitizedName(),
@@ -118,6 +116,6 @@ class HomepagePresenter extends BasePresenter
 
     public function uploadFormSubmitted(Nette\Forms\Controls\SubmitButton $button)
     {
-        $this->redirect('Homepage:'.PhotoModel::$urlsToActions[$this->presenter->getHttpRequest()->getUrl()->getHostUrl()], array('type' => null, 'op' => null));
+        $this->redirect('Homepage:'.$this->photoModel->getDomainAction($this->presenter->getHttpRequest()->getUrl()->getHostUrl()), array('type' => null, 'op' => null));
     }
 }

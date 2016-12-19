@@ -1,8 +1,5 @@
 parameters:
-    soapUrl: "https://websrv.albixon.cz:8444/EPF2WebService.asmx" #ostra
-#    soapUrl: "https://websrv.albixon.cz:8447/EPF2WebService.asmx" #test
-    soapLogin: axvp
-    soapPass: axvp123
+
 
 
 application:
@@ -17,6 +14,6 @@ session:
 
 
 services:
-	router: App\RouterFactory::createRouter
-	- Model\PhotoModel
+	router: App\RouterFactory::createRouter(%domainInternal%, %domainExternal%)
+	- Model\PhotoModel(@database.default, %domainInternal%, %domainExternal%)
 	- App\Model\SoapService(%soapUrl%, %soapLogin%, %soapPass%)
