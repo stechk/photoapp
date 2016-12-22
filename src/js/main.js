@@ -32,7 +32,6 @@ $(document).ready(function () {
                     //reload window after successfull upload all files
                     // window.location.reload();
                     var urlWithoutCount = String(window.location).replace(/&count=[0-9]+/i, '');
-                    console.log(urlWithoutCount);
                     window.location.replace(urlWithoutCount + '&count=' + filestoupload);
                 }
             }, 300);

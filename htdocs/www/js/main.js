@@ -19,7 +19,7 @@ $(document).ready(function() {
                 if (0 == c) {
                     clearInterval(a);
                     var d = String(window.location).replace(/&count=[0-9]+/i, "");
-                    console.log(d), window.location.replace(d + "&count=" + b);
+                    window.location.replace(d + "&count=" + b);
                 }
             }, 300);
         }

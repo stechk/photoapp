@@ -14,21 +14,17 @@
         <p class="center">Počet nahraných fotek: {$countUploadedPhotos}</p>
     {/if}
 
-    {dump $photos}
     {ifset $photos}
         <div class="attachments m10">
             <p class="xlarge"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
 
             {foreach $photos as $typeName => $dates}
-                {if $typeName == \Model\PhotoModel::TYPE_CONSTRUCT}
-                    <p class="type"><strong>Montáž</strong></p>
-                {elseif $typeName == \Model\PhotoModel::TYPE_SERVICE}
-                    <p class="type"><strong>Servis</strong></p>
-                {elseif $typeName == \Model\PhotoModel::TYPE_MEASUREMENT}
-                    <p class="type"><strong>Zaměřování</strong></p>
-                {elseif $typeName == \Model\PhotoModel::TYPE_EXPEDITION}
-                    <p class="type"><strong>Expedice</strong></p>
-                {/if}
+
+                {foreach \Model\PhotoModel::$types as $typeOfWork}
+                    {if $typeName == $typeOfWork['id']}
+                        <p class="type"><strong>{$typeOfWork['name']}</strong></p>
+                    {/if}
+                {/foreach}
                 <ul>
                     {foreach $dates as $date => $photosByDate}
                         <p><strong>{$date|date:'%d.%m.%Y'}</strong></p>
@@ -41,22 +37,12 @@
                     {/foreach}
                 </ul>
             {/foreach}
-            {if !isset($photos['zamereni'])}
-                <p><strong>Zaměření</strong></p>
-                <p>Žádné fotografie ze zaměřování nenalezeny</p>
-            {/if}
-            {if !isset($photos['servis'])}
-                <p><strong>Servis</strong></p>
-                <p>Žádné fotografie ze servisu nenalezeny</p>
-            {/if}
-            {if !isset($photos['montaz'])}
-                <p><strong>Montáž</strong></p>
-                <p>Žádné fotografie z montáže nenalezeny</p>
-            {/if}
-            {if !isset($photos['expedice'])}
-                <p><strong>Expedice</strong></p>
-                <p>Žádné fotografie z expedice nenalezeny</p>
-            {/if}
+            {foreach \Model\PhotoModel::$types as $typeOfWork}
+                {if !isset($photos[$typeOfWork['id']])}
+                    <p class="type"><strong>{$typeOfWork['name']}</strong></p>
+                    <p>Žádné fotografie ze zaměřování nenalezeny</p>
+                {/if}
+            {/foreach}
         </div>
     {/ifset}
         <div class="button-col center">

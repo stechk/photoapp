@@ -21,16 +21,20 @@ class PhotoModel
     const TYPE_CONSTRUCT = 'montaz';
     const TYPE_SERVICE = 'servis';
     const TYPE_EXPEDITION = 'expedice';
+    const TYPE_BRILIX = 'brilix';
+    const TYPE_VYROBA = 'vyroba';
 
     /**
      * Allowed types
      * @var array
      */
-    private $types = [
+    public static $types = [
         ["id" =>self::TYPE_CONSTRUCT, "name" => "Montáž"],
         ["id" =>self::TYPE_SERVICE, "name" => "Servis"],
         ["id" =>self::TYPE_MEASUREMENT, "name" => "Zaměření"],
         ["id" =>self::TYPE_EXPEDITION, "name" => "Expedice"],
+        ["id" =>self::TYPE_BRILIX, "name" => "Brilix"],
+        ["id" =>self::TYPE_VYROBA, "name" => "Výroba"],
     ];
 
     /**
@@ -48,7 +52,7 @@ class PhotoModel
      */
     public function isAllowedParameter($type)
     {
-        foreach ($this->types as $item) {
+        foreach (self::$types as $item) {
             if ($item["id"] == $type) {
                 return true;
             }
@@ -62,7 +66,7 @@ class PhotoModel
      */
     public function getTypeByName($type)
     {
-        foreach ($this->types as $item) {
+        foreach (self::$types as $item) {
             if ($item["id"] == $type) {
                 return $item;
             }
