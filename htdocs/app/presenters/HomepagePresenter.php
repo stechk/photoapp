@@ -53,23 +53,25 @@ class HomepagePresenter extends BasePresenter
                 //ulozeni souboru z formulare
                 /** @var Nette\Http\FileUpload $file */
                 $file = $files["upload"][0];
-                $rand =  rand(100, 999);
-                $sharedPath = "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand. '-' . $file->getSanitizedName();
+                $rand = rand(100, 999);
+                $sharedPath = "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand . '-' . $file->getSanitizedName();
                 $dest = $filespath . $sharedPath;
                 $destView = "/files" . $sharedPath;
-                $file->move($dest);
-                //test razeni dle datumu
+                if ($file->isOk()) {
+                    $file->move($dest);
+                    //test razeni dle datumu
 //                $date = new Nette\Utils\DateTime();
 //                $date->add(\DateInterval::createFromDateString('yesterday'));
-                $saveData = [
-                    'filepath' => $destView,
-                    'file_name' => $file->getSanitizedName(),
-                    'op' => $this->op,
-                    'type' => $this->type,
+                    $saveData = [
+                        'filepath' => $destView,
+                        'file_name' => $file->getSanitizedName(),
+                        'op' => $this->op,
+                        'type' => $this->type,
 //                    'timestamp' => $date
-                    'timestamp' => new Nette\Utils\DateTime()
-                ];
-                $this->photoModel->saveImage($saveData);
+                        'timestamp' => new Nette\Utils\DateTime()
+                    ];
+                    $this->photoModel->saveImage($saveData);
+                }
             }
             $this->terminate();
         }
