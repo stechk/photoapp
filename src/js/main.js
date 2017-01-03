@@ -19,8 +19,8 @@ $(document).ready(function () {
     $('#frm-uploadForm-upload').fileupload({
         //url: $("#frm-form").attr("action"),
         dataType: 'text',
-        imageMaxWidth: 1024,
-        imageMaxHeight: 1024,
+        imageMaxWidth: 1200,
+        imageMaxHeight: 1200,
         disableImageResize: false,
         imageForceResize: true,
         done: function (e, data) {
