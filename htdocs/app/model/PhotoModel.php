@@ -17,6 +17,8 @@ class PhotoModel
     const TYPE_CONSTRUCT = 'montaz';
     const TYPE_SERVICE = 'servis';
     const TYPE_EXPEDITION = 'expedice';
+    const TYPE_BRILIX = 'brilix';
+    const TYPE_VYROBA = 'vyroba';
 
     private $domainInternal;
     private $domainExternal;
@@ -30,6 +32,14 @@ class PhotoModel
      * Povolene kategorie (typy) fotek dle domeny
      * @var array
      */
+    public static $types = [
+        ["id" =>self::TYPE_CONSTRUCT, "name" => "Montáž"],
+        ["id" =>self::TYPE_SERVICE, "name" => "Servis"],
+        ["id" =>self::TYPE_MEASUREMENT, "name" => "Zaměření"],
+        ["id" =>self::TYPE_EXPEDITION, "name" => "Expedice"],
+        ["id" =>self::TYPE_BRILIX, "name" => "Brilix"],
+        ["id" =>self::TYPE_VYROBA, "name" => "Výroba"],
+    ];
     private $allowedTypesByUrl;
 
 

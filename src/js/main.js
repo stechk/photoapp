@@ -19,8 +19,8 @@ $(document).ready(function () {
     $('#frm-uploadForm-upload').fileupload({
         //url: $("#frm-form").attr("action"),
         dataType: 'text',
-        imageMaxWidth: 1024,
-        imageMaxHeight: 1024,
+        imageMaxWidth: 1200,
+        imageMaxHeight: 1200,
         disableImageResize: false,
         imageForceResize: true,
         done: function (e, data) {
@@ -32,7 +32,6 @@ $(document).ready(function () {
                     //reload window after successfull upload all files
                     // window.location.reload();
                     var urlWithoutCount = String(window.location).replace(/&count=[0-9]+/i, '');
-                    console.log(urlWithoutCount);
                     window.location.replace(urlWithoutCount + '&count=' + filestoupload);
                 }
             }, 300);
