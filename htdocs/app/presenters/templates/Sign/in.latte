@@ -1,0 +1,44 @@
+{block content}
+<div id="login">
+    <h1 class="login-heading center" n:block=title>Přihlášení</h1>
+    <div class="row center">
+        <p>Přihlašujte se údaji do ZRCADLA<br>Zapomenuté heslo obnovíte <a href="http://osobnivykaz.albixon.cz/sign/reset">zde</a></p>
+    </div>
+    {*<div class="logout-message">*}
+        {*<div n:if="count($flashes)>0" id="flashmessages">*}
+            {*<div n:foreach="$flashes as $flash"*}
+                 {*class='flashmessage {$flash->type}'>{$flash->message}*}
+            {*</div>*}
+        {*</div>*}
+    {*</div>*}
+
+    <div class="login-form">
+        {form signInForm}
+            <div class="errors alert-danger mt20" n:if="$form->hasErrors()"
+                 n:foreach="$form->errors as $error">{$error}</div>
+            <div class="row mt20">
+                <div class="col-sm-3">
+                    {label username, for=> "email", class=> "email-label control-label"/}
+                </div>
+                <div class="col-sm-9">
+                    {input username, class=> "email form-control"}
+                </div>
+            </div>
+            <div class="row mt20">
+                <div class="col-sm-3">
+                    {label password, for=> "password", class=> "password-label control-label"/}
+                </div>
+                <div class="col-sm-9">
+                    {input password, class=> "password form-control"}
+                </div>
+            </div>
+            <div class="row mt20">
+                <div class="col-sm-8 col-sm-offset-2">
+                    {input send, class=> "send form-control btn foto-links"}
+                </div>
+            </div>
+        {/form}
+    </div>
+</div>
+
+{* or use {include '../components/form.latte', form => signInForm} *}

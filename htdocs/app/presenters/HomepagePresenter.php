@@ -29,14 +29,18 @@ class HomepagePresenter extends BasePresenter
     {
         $this->photoModel = $photoModel;
         $this->soapService = $soapService;
-
     }
 
     protected function beforeRender()
     {
+
+        if (!$this->presenter->user->isLoggedIn()) {
+            $this->flashMessage("Nemáte oprávnění", "alert-danger");
+            $this->presenter->redirect('Sign:in');
+        }
         $files = $this->presenter->getHttpRequest()->getFiles();
         $post = $this->presenter->getHttpRequest()->getPost();
-        $url = $this->presenter->getHttpRequest()->getUrl()->getHostUrl();
+        $url = $this->presenter->getHttpRequest()->getUrl()->host;
 
         if (!$this->photoModel->isAllowedParameter($this->type, $url) && $this->type != null) {
             $this->type = null;
@@ -60,15 +64,12 @@ class HomepagePresenter extends BasePresenter
                 $destView = "/files" . $sharedPath;
                 if ($file->isOk()) {
                     $file->move($dest);
-                    //test razeni dle datumu
-//                $date = new Nette\Utils\DateTime();
-//                $date->add(\DateInterval::createFromDateString('yesterday'));
                     $saveData = [
                         'filepath' => $destView,
                         'file_name' => $file->getSanitizedName(),
                         'op' => $this->op,
                         'type' => $this->type,
-//                    'timestamp' => $date
+                        'user_id' => $this->user->id,
                         'timestamp' => new Nette\Utils\DateTime()
                     ];
                     $this->photoModel->saveImage($saveData);
@@ -82,6 +83,10 @@ class HomepagePresenter extends BasePresenter
     {
         $this->template->photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
         $this->template->countUploadedPhotos = $this->getParameter('count');
+        $this->template->allTypes = $this->photoModel->getAllTypes();
+    }
+    public function renderDefault(){
+        $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
     }
 
     protected function createComponentSearchForm()
@@ -120,6 +125,6 @@ class HomepagePresenter extends BasePresenter
 
     public function uploadFormSubmitted(Nette\Forms\Controls\SubmitButton $button)
     {
-        $this->redirect('Homepage:'.$this->photoModel->getDomainAction($this->presenter->getHttpRequest()->getUrl()->getHostUrl()), array('type' => null, 'op' => null));
+        $this->redirect('Homepage:'.$this->photoModel->getDomainAction($this->presenter->getHttpRequest()->getUrl()->host), array('type' => null, 'op' => null));
     }
 }

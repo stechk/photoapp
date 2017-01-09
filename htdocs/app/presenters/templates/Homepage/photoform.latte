@@ -20,7 +20,7 @@
 
             {foreach $photos as $typeName => $dates}
 
-                {foreach \Model\PhotoModel::$types as $typeOfWork}
+                {foreach $allTypes as $typeOfWork}
                     {if $typeName == $typeOfWork['id']}
                         <p class="type"><strong>{$typeOfWork['name']}</strong></p>
                     {/if}
@@ -37,7 +37,7 @@
                     {/foreach}
                 </ul>
             {/foreach}
-            {foreach \Model\PhotoModel::$types as $typeOfWork}
+            {foreach $allTypes as $typeOfWork}
                 {if !isset($photos[$typeOfWork['id']])}
                     <p class="type"><strong>{$typeOfWork['name']}</strong></p>
                     <p>Žádné fotografie ze zaměřování nenalezeny</p>

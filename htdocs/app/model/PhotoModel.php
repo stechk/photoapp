@@ -28,18 +28,7 @@ class PhotoModel
      */
     private $database;
 
-    /**
-     * Povolene kategorie (typy) fotek dle domeny
-     * @var array
-     */
-    public static $types = [
-        ["id" =>self::TYPE_CONSTRUCT, "name" => "Montáž"],
-        ["id" =>self::TYPE_SERVICE, "name" => "Servis"],
-        ["id" =>self::TYPE_MEASUREMENT, "name" => "Zaměření"],
-        ["id" =>self::TYPE_EXPEDITION, "name" => "Expedice"],
-        ["id" =>self::TYPE_BRILIX, "name" => "Brilix"],
-        ["id" =>self::TYPE_VYROBA, "name" => "Výroba"],
-    ];
+
     private $allowedTypesByUrl;
 
 
@@ -58,6 +47,8 @@ class PhotoModel
                 ["id" => self::TYPE_CONSTRUCT, "name" => "Montáž"],
                 ["id" => self::TYPE_SERVICE, "name" => "Servis"],
                 ["id" => self::TYPE_MEASUREMENT, "name" => "Zaměření"],
+                ["id" =>self::TYPE_BRILIX, "name" => "Brilix"],
+                ["id" =>self::TYPE_VYROBA, "name" => "Výroba"],
             ],
             $this->domainExternal["domain"] => [
                 ["id" => self::TYPE_EXPEDITION, "name" => "Expedice"],
@@ -76,6 +67,15 @@ class PhotoModel
         }
     }
 
+    public function getAllTypes(){
+        foreach ($this->allowedTypesByUrl as $domainTypes) {
+            foreach ($domainTypes as $type){
+                $return[] = $type;
+            }
+        }
+        return $return;
+    }
+
     /**
      * @param $type
      * @return bool
@@ -92,6 +92,15 @@ class PhotoModel
             }
         }
         return false;
+    }
+
+    public function getTypesByDomain($domain){
+        foreach ($this->allowedTypesByUrl as $k => $domainTypes){
+            if($k == $domain){
+                $return = $domainTypes;
+            }
+        }
+        return $return;
     }
 
     /**
@@ -119,7 +128,6 @@ class PhotoModel
     {
         return $this->database->query('SELECT i.*, DATE_FORMAT(i.timestamp, "%Y-%m-%d") AS formatted_date 
                                         FROM images as i WHERE i.op = ?', $op);
-
     }
 
     public function saveImage($data)

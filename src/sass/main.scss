@@ -180,6 +180,11 @@ label {
   }
 }
 
+.logout-btn {
+  float: right;
+  margin-right: 20px;
+}
+
 @media (max-width: 480px) {
   #nav-mobile {
     li {
@@ -194,6 +199,16 @@ label {
     }
   }
 
+}
+
+@media (max-width: 857px) {
+  .logout-btn {
+    float: none;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 120px;
+  }
 }
 
 @media (min-width: 500px) {

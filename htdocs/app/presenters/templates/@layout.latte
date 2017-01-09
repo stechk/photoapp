@@ -30,39 +30,9 @@
     <meta name="msapplication-config" content="{$basePath}/images/browserconfig.xml"/>
 </head>
 <body>
-<nav>
-    <div class="nav-wrapper">
-        <ul id="nav-mobile">
-            {*|| $presenter->isLinkCurrent("Homepage:notDefault")*}
-            <li n:class='$presenter->isLinkCurrent("Homepage:$actionByUrl") ? active, isset($type) ? checked' id="co-fotit">
-                {if isset($type)}
-                    <a href="{link Homepage:$actionByUrl, type => null, op => null}" class="done item">Co chceš fotit&nbsp;<i
-                                class="material-icons tiny">done</i><span n:if="isset($type)"
-                                                                          class="second-line">{$type["name"]}</span></a>
-
-                {else}
-                    <a href="{link Homepage:$actionByUrl}">Co chceš fotit</a>
-                {/if}
-            </li>
-            <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, isset($op) && isset($type) ? checked">
-                {if isset($type) && isset($op)}
-                    <a href="{link Homepage:op, op => null}" class="done item">Vyber OP&nbsp;<i
-                                class="material-icons tiny">done</i>
-                        <span class="second-line">{$op}</span></a>
-                {else}
-                    <span>Vyber OP</span>
-                {/if}
-            </li>
-            <li n:class="$presenter->isLinkCurrent('Homepage:photoform') ? active">
-                {if isset($type) && isset($op)}
-                    <a href="{link Homepage:photoform}">Foť</a>
-                {else}
-                    <span>Foť</span>
-                {/if}
-            </li>
-        </ul>
-    </div>
-</nav>
+{if ($presenter->isLinkCurrent('Homepage:*')) && isset($actionByUrl)}
+    {include appNavig}
+{/if}
 
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 <div class="container">
@@ -90,3 +60,40 @@
 {/block}
 </body>
 </html>
+
+{define appNavig}
+    <nav>
+        <div class="nav-wrapper">
+            <ul id="nav-mobile">
+                <li n:class='$presenter->isLinkCurrent("Homepage:$actionByUrl") ? active, isset($type) ? checked'
+                    id="co-fotit">
+                    {if isset($type)}
+                        <a href="{link Homepage:$actionByUrl, type => null, op => null}" class="done item">Co chceš
+                            fotit&nbsp;<i
+                                    class="material-icons tiny">done</i><span n:if="isset($type)"
+                                                                              class="second-line">{$type["name"]}</span></a>
+                    {else}
+                        <a href="{link Homepage:$actionByUrl}">Co chceš fotit</a>
+                    {/if}
+                </li>
+                <li n:class="$presenter->isLinkCurrent('Homepage:op') ? active, isset($op) && isset($type) ? checked">
+                    {if isset($type) && isset($op)}
+                        <a href="{link Homepage:op, op => null}" class="done item">Vyber OP&nbsp;<i
+                                    class="material-icons tiny">done</i>
+                            <span class="second-line">{$op}</span></a>
+                    {else}
+                        <span>Vyber OP</span>
+                    {/if}
+                </li>
+                <li n:class="$presenter->isLinkCurrent('Homepage:photoform') ? active">
+                    {if isset($type) && isset($op)}
+                        <a href="{link Homepage:photoform}">Foť</a>
+                    {else}
+                        <span>Foť</span>
+                    {/if}
+                </li>
+            </ul>
+        </div>
+    </nav>
+        <a href="{plink Sign:out}" class="btn mt20 logout-btn">Odhlásit</a>
+{/define}

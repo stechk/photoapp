@@ -6456,12 +6456,23 @@ label {
   .flash.error {
     color: red; }
 
+.logout-btn {
+  float: right;
+  margin-right: 20px; }
+
 @media (max-width: 480px) {
   #nav-mobile li a, #nav-mobile li span {
     font-size: small; }
 
   body h1 {
     font-size: 2.2rem; } }
+@media (max-width: 857px) {
+  .logout-btn {
+    float: none;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 120px; } }
 @media (min-width: 500px) {
   .oplinks {
     width: 450px; }
