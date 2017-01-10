@@ -43,17 +43,8 @@ class PhotoModel
         $this->domainExternal = $domainExternal;
 
         $this->allowedTypesByUrl = [
-            $this->domainInternal["domain"] => [
-                ["id" => self::TYPE_CONSTRUCT, "name" => "Montáž"],
-                ["id" => self::TYPE_SERVICE, "name" => "Servis"],
-                ["id" => self::TYPE_MEASUREMENT, "name" => "Zaměření"],
-                ["id" =>self::TYPE_BRILIX, "name" => "Brilix"],
-                ["id" =>self::TYPE_VYROBA, "name" => "Výroba"],
-            ],
-            $this->domainExternal["domain"] => [
-                ["id" => self::TYPE_EXPEDITION, "name" => "Expedice"],
-            ]
-        ];
+            $this->domainInternal["domain"] => $this->domainInternal["sections"],
+            $this->domainExternal["domain"] => $this->domainExternal["sections"]];
     }
 
 

@@ -40,7 +40,7 @@
             {foreach $allTypes as $typeOfWork}
                 {if !isset($photos[$typeOfWork['id']])}
                     <p class="type"><strong>{$typeOfWork['name']}</strong></p>
-                    <p>Žádné fotografie ze zaměřování nenalezeny</p>
+                    <p>Žádné fotografie z kategorie {$typeOfWork['name']} nenalezeny</p>
                 {/if}
             {/foreach}
         </div>

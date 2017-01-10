@@ -49,6 +49,7 @@ class HomepagePresenter extends BasePresenter
         }
         $this->template->actionByUrl = $this->photoModel->getDomainAction($url);
         $this->template->type = $this->photoModel->getTypeByName($this->type, $url);
+        $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
         $this->template->op = $this->op;
 
 
@@ -85,9 +86,7 @@ class HomepagePresenter extends BasePresenter
         $this->template->countUploadedPhotos = $this->getParameter('count');
         $this->template->allTypes = $this->photoModel->getAllTypes();
     }
-    public function renderDefault(){
-        $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
-    }
+
 
     protected function createComponentSearchForm()
     {

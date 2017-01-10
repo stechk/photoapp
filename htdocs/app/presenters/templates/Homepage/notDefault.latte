@@ -2,8 +2,10 @@
 <div class="center">
     <h1>Vyberte co chcete fotit</h1>
     <div class="container">
-        <a href="{link Homepage:op, type => \Model\PhotoModel::TYPE_EXPEDITION}"
-           class="waves-effect waves-light btn-large foto-links">Expedice</a>
+        {foreach $typesByUrl as $type}
+            <a href="{link Homepage:op, type => $type['id']}"
+               class="waves-effect waves-light btn-large foto-links">{$type['name']}</a>
+        {/foreach}
     </div>
     <div class="logo">
         <img src="{$basePath}/images/albixon_watermark.png">
