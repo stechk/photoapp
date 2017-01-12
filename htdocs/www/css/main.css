@@ -6360,6 +6360,9 @@ nav {
     width: 230px; }
 #frm-uploadForm .file-path-wrapper .validate {
   border-bottom: none; }
+#frm-uploadForm #exit {
+  line-height: inherit;
+  margin-bottom: 100px; }
 
 .photo {
   max-width: 110px;
