@@ -37,11 +37,15 @@
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 <div class="container">
     {include content}
-    <div id="footer" class="center-align">
-        <div class="footer-links">
-        <a href="{plink Sign:out}" class="pad5-20-5-20">Odhlásit</a>
+    {if ($presenter->isLinkCurrent('Homepage:*'))}
+        <div id="footer" class="center-align">
+            <div class="footer-links">
+                <a href="{plink Sign:out}"
+                   class="pad5-20-5-20"> {if $presenter->user->getIdentity()->full_name}{$presenter->user->getIdentity()->full_name} - {/if}
+                    Odhlásit</a>
+            </div>
         </div>
-    </div>
+    {/if}
 </div>
 {block scripts}
     <!--Import jQuery before materialize.js-->
@@ -100,5 +104,4 @@
             </ul>
         </div>
     </nav>
-
 {/define}
