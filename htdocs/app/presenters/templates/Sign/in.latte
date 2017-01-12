@@ -1,16 +1,10 @@
 {block content}
 <div id="login">
-    <h1 class="login-heading center" n:block=title>Přihlášení</h1>
+    <div class="container">
+    <h1 class="login-heading center" n:block=title>Foto Albixon - Přihlášení</h1>
     <div class="row center">
-        <p>Přihlašujte se údaji do ZRCADLA<br>Zapomenuté heslo obnovíte <a href="http://osobnivykaz.albixon.cz/sign/reset">zde</a></p>
+        <p>Přihlašujte se údaji do ZRCADLA</p>
     </div>
-    {*<div class="logout-message">*}
-        {*<div n:if="count($flashes)>0" id="flashmessages">*}
-            {*<div n:foreach="$flashes as $flash"*}
-                 {*class='flashmessage {$flash->type}'>{$flash->message}*}
-            {*</div>*}
-        {*</div>*}
-    {*</div>*}
 
     <div class="login-form">
         {form signInForm}
@@ -18,6 +12,7 @@
                  n:foreach="$form->errors as $error">{$error}</div>
             <div class="row mt20">
                 <div class="col-sm-3">
+                    <i class="material-icons prefix">account_circle</i>
                     {label username, for=> "email", class=> "email-label control-label"/}
                 </div>
                 <div class="col-sm-9">
@@ -26,6 +21,7 @@
             </div>
             <div class="row mt20">
                 <div class="col-sm-3">
+                    <i class="material-icons prefix">verified_user</i>
                     {label password, for=> "password", class=> "password-label control-label"/}
                 </div>
                 <div class="col-sm-9">
@@ -34,11 +30,14 @@
             </div>
             <div class="row mt20">
                 <div class="col-sm-8 col-sm-offset-2">
-                    {input send, class=> "send form-control btn foto-links"}
+                    <i class="send fright form-control btn waves-effect waves-light foto-links waves-input-wrapper" style="">
+                        <i class="material-icons right arrow-login">send</i>
+                        <input type="submit" name="send" value="Přihlásit" class="waves-button-input"></i>
                 </div>
             </div>
         {/form}
     </div>
+    <p class="center-align">Zapomenuté heslo obnovíte <a href="http://osobnivykaz.albixon.cz/sign/reset">zde</a></p>
+    </div>
 </div>
 
-{* or use {include '../components/form.latte', form => signInForm} *}

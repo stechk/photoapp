@@ -17,10 +17,10 @@ class RouterFactory
     public static function createRouter($domainInternal, $domainExternal)
     {
         $router = new RouteList;
-        $router[] = new Route('prihlaseni/', 'Sign:in');
+        $router[] = new Route('', 'Sign:in');
         $router[] = new Route('odhlaseni/', 'Sign:out');
-        $router[] = new Route('foto[/<id>]', 'Homepage:photoform');
-        $router[] = new Route('<action>[/<id>]', [
+        $router[] = new Route('upload/[/<id>]', 'Homepage:photoform');
+        $router[] = new Route('foto/<action>[/<id>]', [
             'presenter' => 'Homepage',
             'action' => self::getAction($domainInternal, $domainExternal),
         ]);

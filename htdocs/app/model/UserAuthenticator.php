@@ -28,11 +28,11 @@ class UserAuthenticator implements NS\IAuthenticator
         $row = $this->database->query('SELECT * FROM users WHERE email = ?', $email)->fetch();
 
         if (!$row) {
-            throw new NS\AuthenticationException('Uživatel nenalezen');
+            throw new NS\AuthenticationException('Nesprávné jméno nebo heslo');
         }
 
         if ($this->calculateHash($password) !== $row->password) {
-            throw new NS\AuthenticationException('Nesprávné heslo');
+            throw new NS\AuthenticationException('Nesprávné jméno nebo heslo');
         }
 
         return new NS\Identity($row->users_id, $row->users_roles_id,['full_name' => $row->name . ' '. $row->lastname]);

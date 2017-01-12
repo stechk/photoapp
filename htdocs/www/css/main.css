@@ -6331,6 +6331,19 @@ body {
   body h1 {
     font-size: 3.2rem; }
 
+#footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 40px;
+  width: 100%;
+  background: #419c2a;
+  z-index: 10; }
+  #footer a {
+    color: white; }
+  #footer .footer-links {
+    margin-top: 10px; }
+
 nav {
   background-color: #419c2a; }
 
@@ -6364,6 +6377,9 @@ nav {
 
 .btn-large {
   font-size: 1.3rem; }
+
+.pad5-20-5-20 {
+  padding: 5px 20px 5px 20px; }
 
 #nav-mobile {
   width: 320px;
@@ -6444,7 +6460,7 @@ label {
     position: relative;
     top: -7px; }
 
-.logo {
+.padtop50 {
   padding-top: 50px; }
 
 .flash {
@@ -6455,6 +6471,18 @@ label {
     color: green; }
   .flash.error {
     color: red; }
+
+.arrow-login {
+  position: absolute;
+  right: 10%; }
+
+.fright {
+  float: right; }
+
+.login-form .label {
+  margin-left: 1rem; }
+.login-form .prefix {
+  position: absolute; }
 
 .logout-btn {
   float: right;

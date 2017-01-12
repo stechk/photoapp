@@ -35,7 +35,6 @@ class HomepagePresenter extends BasePresenter
     {
 
         if (!$this->presenter->user->isLoggedIn()) {
-            $this->flashMessage("Nemáte oprávnění", "alert-danger");
             $this->presenter->redirect('Sign:in');
         }
         $files = $this->presenter->getHttpRequest()->getFiles();

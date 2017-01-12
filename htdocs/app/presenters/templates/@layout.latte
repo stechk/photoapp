@@ -37,6 +37,11 @@
 <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 <div class="container">
     {include content}
+    <div id="footer" class="center-align">
+        <div class="footer-links">
+        <a href="{plink Sign:out}" class="pad5-20-5-20">Odhlásit</a>
+        </div>
+    </div>
 </div>
 {block scripts}
     <!--Import jQuery before materialize.js-->
@@ -95,5 +100,5 @@
             </ul>
         </div>
     </nav>
-        <a href="{plink Sign:out}" class="btn mt20 logout-btn">Odhlásit</a>
+
 {/define}

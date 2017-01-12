@@ -9,6 +9,21 @@ body {
     font-size: 3.2rem;
   }
 }
+#footer{
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 40px;
+  width: 100%;
+  background: $albixonGreenColor;
+  z-index: 10;
+  a{
+    color: white;
+  }
+  .footer-links {
+    margin-top: 10px;
+  }
+}
 
 nav {
   background-color: $albixonGreenColor;
@@ -57,6 +72,9 @@ nav {
   font-size: 1.3rem;
 }
 
+.pad5-20-5-20 {
+  padding: 5px 20px 5px 20px;
+}
 
 #nav-mobile {
   width: 320px;
@@ -164,7 +182,7 @@ label {
     }
   }
 }
-.logo{
+.padtop50 {
   padding-top: 50px;
 }
 
@@ -177,6 +195,24 @@ label {
   }
   &.error {
     color: red;
+  }
+}
+
+.arrow-login {
+  position: absolute;
+  right: 10%;
+
+}
+.fright {
+  float: right;
+}
+
+.login-form{
+  .label {
+    margin-left: 1rem;
+  }
+  .prefix {
+    position: absolute;
   }
 }
 
