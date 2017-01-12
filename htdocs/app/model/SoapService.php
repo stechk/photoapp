@@ -32,27 +32,25 @@ class SoapService
 
     }
 
-    public function GetCislaOP($partOfOP, $countOfReturned = 50)
+    public function GetCislaOPPart($partOfOP, $partOfPartner, $countOfReturned = 50)
     {
-        $method = "GetCislaOP";
-
+        $method = "GetCislaOPPart";
+//
         $xml_post_string = '<?xml version="1.0" encoding="utf-8" ?>
-            <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:epas="http://www.epass.cz/EPASSr">
-               <soap:Header>
-                  <epas:F2SoapHeader>
-                     <!--Optional:-->
-                     <epas:login>' . $this->login . '</epas:login>
-                     <!--Optional:-->
-                     <epas:psw>' . $this->pass . '</epas:psw>
-                     <!--Optional:-->
-                     <epas:nationalCentralId></epas:nationalCentralId>
-                  </epas:F2SoapHeader>
-               </soap:Header>
+            <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+              <soap:Header>
+                <F2SoapHeader xmlns="http://www.albixon.cz">
+                  <login>' . $this->login . '</login>
+                  <psw>' . $this->pass . '</psw>
+                  <nationalCentralId></nationalCentralId>
+                </F2SoapHeader>
+              </soap:Header>
               <soap:Body>
-                <epas:GetCislaOP>
-                  <epas:castCisla>' . $partOfOP . '</epas:castCisla>
-                  <epas:maxPocet>' . $countOfReturned . '</epas:maxPocet>
-                </epas:GetCislaOP>
+                <GetCislaOPPart xmlns="http://www.albixon.cz">
+                  <castCisla>' . $partOfOP . '</castCisla>
+                  <castPartner>' . $partOfPartner . '</castPartner>
+                  <maxPocet>' . $countOfReturned . '</maxPocet>
+                </GetCislaOPPart>
               </soap:Body>
             </soap:Envelope>';
 
@@ -69,11 +67,18 @@ class SoapService
         $doc->loadXML($response);
 
         $ops = [];
+
         foreach ($doc->getElementsByTagName("cislaOP")[0]->childNodes as $o) {
-            $ops[] =
-                [
-                    "op" => (int)$o->nodeValue,
-                ];
+
+                $ops[] =
+                    [
+                        "op" => (int)$o->nodeValue,
+                        "partner" => $o->getElementsByTagName("partner")[0]->nodeValue,
+                        "mistoPlneni" => $o->getElementsByTagName("mistoPlneni")[0]->nodeValue,
+                        "kategorie" => $o->getElementsByTagName("kategorie")[0]->nodeValue,
+
+                    ];
+
 
         }
         return $ops;
@@ -87,11 +92,11 @@ class SoapService
     private function callService($xml_post_string, $method)
     {
         $headers = array(
-            "POST /EPF2WebService.asmx HTTP/1.1",
-            "Host: websrv.albixon.cz",
+            "POST /ErpDataWs/erpdata.asmx HTTP/1.1",
+            "Host: 172.20.2.44",
             "Content-Type: text/xml; charset=utf-8",
             "Content-Length: " . strlen($xml_post_string),
-            'SOAPAction: "http://www.epass.cz/EPASSr/' . $method . '"',
+            'SOAPAction: "http://www.albixon.cz/' . $method . '"',
         );
 
         // PHP cURL  for https connection with auth

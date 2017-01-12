@@ -16,7 +16,23 @@
 
     {ifset $photos}
         <div class="attachments m10">
-            <p class="xlarge"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>
+            <table class="add-info">
+                <tr>
+                    <th>Partner:</th>
+                    <td>{if!empty($opData[0]['partner'])}{$opData[0]['partner']}{/if}</td>
+                </tr>
+                <tr>
+                    <th>Místo plnění:</th>
+                    <td>{if!empty($opData[0]['mistoPlneni'])}{$opData[0]['mistoPlneni']}{/if}</td>
+                </tr>
+                <tr>
+                    <th>Nahrané fotografie k OP:</th>
+                    <td>{$presenter->op}</td>
+                </tr>
+            </table>
+            {*<p class="xlarge"><strong>Partner: {if!empty($opData[0]['partner'])}{$opData[0]['partner']}{/if}</strong></p>*}
+            {*<p class="xlarge"><strong>Místo plnění: {if!empty($opData[0]['mistoPlneni'])}{$opData[0]['mistoPlneni']}{/if}</strong></p>*}
+            {*<p class="xlarge"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>*}
 
             {foreach $photos as $typeName => $dates}
 
@@ -45,7 +61,7 @@
             {/foreach}
         </div>
     {/ifset}
-        <div class="button-col center">
+        <div class="button-col center" id="exit">
             {input submit, class=>"btn waves-effect waves-light btn-large"}
         </div>
     {/form}

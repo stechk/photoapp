@@ -13,10 +13,11 @@
     {ifset $searchResult}
         <p class="center">Nalezeno {count($searchResult)} výsledků</p>
         <ul class="oplinks center">
-            {foreach $searchResult as $number}
+            {*{dump $searchResult}*}
+            {foreach $searchResult as $oneResult}
                 <li n:class="count($searchResult) == 1 ? full : half" id="ops"><a
-                            href="{link Homepage:photoform, op => $number[op]}"
-                            class="larger">{$number[op]}</a></li>
+                            href="{link Homepage:photoform, op => $oneResult['op'], opData => $oneResult}"
+                            class="larger">{$oneResult['op']}</a></li>
             {/foreach}
         </ul>
     {/ifset}

@@ -6347,6 +6347,9 @@ body {
 nav {
   background-color: #419c2a; }
 
+.add-info th {
+  width: 180px; }
+
 #frm-uploadForm .file-field {
   margin-top: 2rem; }
   #frm-uploadForm .file-field .btn, #frm-uploadForm .file-field .btn-large {
@@ -6488,6 +6491,9 @@ label {
   float: right;
   margin-right: 20px; }
 
+@media (max-width: 400px) {
+  .add-info tr, .add-info th {
+    width: 50%; } }
 @media (max-width: 480px) {
   #nav-mobile li a, #nav-mobile li span {
     font-size: small; }

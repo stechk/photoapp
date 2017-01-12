@@ -22,11 +22,15 @@ class HomepagePresenter extends BasePresenter
      */
     public $op;
 
+    public $opData;
+
+
     public $photoModel;
     public $soapService;
 
     public function __construct(PhotoModel $photoModel, SoapService $soapService)
     {
+
         $this->photoModel = $photoModel;
         $this->soapService = $soapService;
     }
@@ -81,6 +85,7 @@ class HomepagePresenter extends BasePresenter
 
     public function renderPhotoform()
     {
+        $this->template->opData = $this->soapService->GetCislaOPPart($this->op,'');
         $this->template->photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
         $this->template->countUploadedPhotos = $this->getParameter('count');
         $this->template->allTypes = $this->photoModel->getAllTypes();
@@ -101,7 +106,7 @@ class HomepagePresenter extends BasePresenter
 
     public function searchFormSubmitted(Nette\Application\UI\Form $form, $values)
     {
-        $result = $this->soapService->GetCislaOP($values['op']);
+        $result = $this->soapService->GetCislaOPPart($values['op'],'');
         if (!empty($result)) {
             $this->template->searchResult = $result;
         } else {
