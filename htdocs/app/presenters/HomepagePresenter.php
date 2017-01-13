@@ -22,8 +22,6 @@ class HomepagePresenter extends BasePresenter
      */
     public $op;
 
-    public $opData;
-
 
     public $photoModel;
     public $soapService;

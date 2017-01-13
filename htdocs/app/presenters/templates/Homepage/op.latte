@@ -16,7 +16,7 @@
             {*{dump $searchResult}*}
             {foreach $searchResult as $oneResult}
                 <li n:class="count($searchResult) == 1 ? full : half" id="ops"><a
-                            href="{link Homepage:photoform, op => $oneResult['op'], opData => $oneResult}"
+                            href="{link Homepage:photoform, op => $oneResult['op']}"
                             class="larger">{$oneResult['op']}</a></li>
             {/foreach}
         </ul>
