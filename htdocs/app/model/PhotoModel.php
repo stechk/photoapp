@@ -118,7 +118,7 @@ class PhotoModel
     public function findPhotoByOp($op)
     {
         return $this->database->query('SELECT i.*, DATE_FORMAT(i.timestamp, "%Y-%m-%d") AS formatted_date 
-                                        FROM images as i WHERE i.op = ?', $op);
+                                        FROM images as i WHERE i.op = ? ORDER BY formatted_date DESC', $op);
     }
 
     public function saveImage($data)
