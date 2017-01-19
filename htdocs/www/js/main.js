@@ -7,7 +7,11 @@ $(document).ready(function() {
         });
     });
     var a, b = 0;
-    $("#frm-uploadForm-upload").fileupload({
+    $(document).bind("drop dragover", function(a) {
+        a.preventDefault();
+    }), $("body").on("drop", function(a) {
+        return !1;
+    }), $("#frm-uploadForm-upload").fileupload({
         dataType: "text",
         imageMaxWidth: 1200,
         imageMaxHeight: 1200,

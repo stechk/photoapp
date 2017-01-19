@@ -16,6 +16,14 @@ $(document).ready(function () {
     var interval;
     var filestoupload = 0;
 
+    $(document).bind('drop dragover', function (e) {
+        e.preventDefault();
+    });
+
+    $('body').on('drop', function (e) {
+        return false;
+    });
+
     $('#frm-uploadForm-upload').fileupload({
         //url: $("#frm-form").attr("action"),
         dataType: 'text',
