@@ -13,13 +13,6 @@ use Nette\Database\Connection;
 class PhotoModel
 {
 
-    const TYPE_MEASUREMENT = 'zamereni';
-    const TYPE_CONSTRUCT = 'montaz';
-    const TYPE_SERVICE = 'servis';
-    const TYPE_EXPEDITION = 'expedice';
-    const TYPE_BRILIX = 'brilix';
-    const TYPE_VYROBA = 'vyroba';
-
     private $domainInternal;
     private $domainExternal;
 
