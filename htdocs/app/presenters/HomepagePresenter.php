@@ -5,6 +5,7 @@ namespace App\Presenters;
 
 use Model\PhotoModel;
 use App\Model\SoapService;
+use Model\UserAuthenticator;
 use Nette;
 
 
@@ -25,12 +26,17 @@ class HomepagePresenter extends BasePresenter
 
     public $photoModel;
     public $soapService;
+    /**
+     * @var UserAuthenticator
+     */
+    public $userAuthenticator;
 
-    public function __construct(PhotoModel $photoModel, SoapService $soapService)
+    public function __construct(PhotoModel $photoModel, SoapService $soapService, UserAuthenticator $userAuthenticator)
     {
 
         $this->photoModel = $photoModel;
         $this->soapService = $soapService;
+        $this->userAuthenticator = $userAuthenticator;
     }
 
     protected function beforeRender()
@@ -81,10 +87,30 @@ class HomepagePresenter extends BasePresenter
         }
     }
 
+    public function getAllUsersIdName(){
+        $users=  $this->userAuthenticator->getAllUsers()->fetchAll();
+        foreach ($users as $user){
+            $return[$user['users_id']] = $user['name'].' '.$user['lastname'];
+        }
+        return $return;
+    }
+
     public function renderPhotoform()
     {
         $this->template->opData = $this->soapService->GetCislaOPPart($this->op,'');
-        $this->template->photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
+        $users = $this->getAllUsersIdName();
+        $photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
+        foreach ($photos as $typ => $type){
+            foreach ($type as $dat => $date){
+                foreach ($date as $id => $data){
+
+                        if (!empty($data['user_id']) && isset($users[$data['user_id']])){
+                            $photos[$typ][$dat][$id]['user_full_name'] = $users[$data['user_id']];
+                        }
+                }
+            }
+        }
+        $this->template->photos = $photos;
         $this->template->countUploadedPhotos = $this->getParameter('count');
         $this->template->allTypes = $this->photoModel->getAllTypes();
     }

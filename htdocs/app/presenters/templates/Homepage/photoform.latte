@@ -30,15 +30,12 @@
                     <td>{$presenter->op}</td>
                 </tr>
             </table>
-            {*<p class="xlarge"><strong>Partner: {if!empty($opData[0]['partner'])}{$opData[0]['partner']}{/if}</strong></p>*}
-            {*<p class="xlarge"><strong>Místo plnění: {if!empty($opData[0]['mistoPlneni'])}{$opData[0]['mistoPlneni']}{/if}</strong></p>*}
-            {*<p class="xlarge"><strong>Nahrané fotografie k OP: {$presenter->op}</strong></p>*}
-
             {foreach $photos as $typeName => $dates}
 
                 {foreach $allTypes as $typeOfWork}
                     {if $typeName == $typeOfWork['id']}
                         <p class="type"><strong>{$typeOfWork['name']}</strong></p>
+                        <hr class="clearfix">
                     {/if}
                 {/foreach}
                 <ul>
@@ -46,8 +43,11 @@
                         <p><strong>{$date|date:'%d.%m.%Y'}</strong></p>
                         <br>
                         {foreach $photosByDate as $id => $photoData}
-                            <li class="photo">
+                            <li class="photo center">
                                 <img class="materialboxed" src="{$photoData['filepath']}">
+                                {ifset $photoData['user_full_name']}
+                                    <span>Autor: {$photoData['user_full_name']}</span>
+                                {/ifset}
                             </li>
                         {/foreach}
                     {/foreach}
@@ -56,6 +56,7 @@
             {foreach $allTypes as $typeOfWork}
                 {if !isset($photos[$typeOfWork['id']])}
                     <p class="type"><strong>{$typeOfWork['name']}</strong></p>
+                    <hr class="clearfix">
                     <p>Žádné fotografie z kategorie {$typeOfWork['name']} nenalezeny</p>
                 {/if}
             {/foreach}

@@ -38,6 +38,10 @@ class UserAuthenticator implements NS\IAuthenticator
         return new NS\Identity($row->users_id, $row->users_roles_id,['full_name' => $row->name . ' '. $row->lastname]);
     }
 
+    public function getAllUsers(){
+        return $this->database->query('SELECT * FROM users');
+    }
+
     /**
      * vrací hash hesla
      * @param string $string
