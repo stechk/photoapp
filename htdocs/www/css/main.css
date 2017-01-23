@@ -6350,6 +6350,9 @@ nav {
 .add-info th {
   width: 180px; }
 
+.font12 {
+  font-size: 12px; }
+
 #frm-uploadForm .file-field {
   margin-top: 2rem; }
   #frm-uploadForm .file-field .btn, #frm-uploadForm .file-field .btn-large {
