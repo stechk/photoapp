@@ -13,10 +13,17 @@
     {if !empty($countUploadedPhotos)}
         <p class="center">Počet nahraných fotek: {$countUploadedPhotos}</p>
     {/if}
+<div class="attachments m10">
+    <table class="add-info">
+        <tr>
+            <th>Datum:</th>
+            <td>{input target_date, id => 'theDate'}</td>
+        </tr>
+
+
+        {*<input type="date" name="target_date" id="frm-form-target_date" required="" class="">*}
 
     {ifset $photos}
-        <div class="attachments m10">
-            <table class="add-info">
                 <tr>
                     <th>Partner:</th>
                     <td>{if!empty($opData[0]['partner'])}{$opData[0]['partner']}{/if}</td>

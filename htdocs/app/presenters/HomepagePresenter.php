@@ -65,11 +65,13 @@ class HomepagePresenter extends BasePresenter
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
                 //ulozeni souboru z formulare
                 /** @var Nette\Http\FileUpload $file */
+
                 $file = $files["upload"][0];
                 $rand = rand(100, 999);
                 $sharedPath = "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand . '-' . $file->getSanitizedName();
                 $dest = $filespath . $sharedPath;
                 $destView = "/files" . $sharedPath;
+
                 if ($file->isOk()) {
                     $file->move($dest);
                     $saveData = [
@@ -78,7 +80,7 @@ class HomepagePresenter extends BasePresenter
                         'op' => $this->op,
                         'type' => $this->type,
                         'user_id' => $this->user->id,
-                        'timestamp' => new Nette\Utils\DateTime()
+                        'timestamp' => $post["target_date"]
                     ];
                     $this->photoModel->saveImage($saveData);
                 }
@@ -146,6 +148,9 @@ class HomepagePresenter extends BasePresenter
             ->setRequired(FALSE)
             ->setAttribute('accept', 'image/*')
             ->addRule(Nette\Application\UI\Form::IMAGE, 'Formát jednoho nebo více obrázků není podporován.');
+        $form->addText('target_date')
+            ->setType('date')
+            ->setDefaultValue(new Nette\Utils\DateTime());
         $form->addSubmit('submit', 'Ukončit focení')->onClick[] = [$this, 'uploadFormSubmitted'];
         return $form;
     }

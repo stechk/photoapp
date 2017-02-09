@@ -27,8 +27,8 @@ $(document).ready(function () {
     $('#frm-uploadForm-upload').fileupload({
         //url: $("#frm-form").attr("action"),
         dataType: 'text',
-        imageMaxWidth: 1200,
-        imageMaxHeight: 1200,
+        imageMaxWidth: 1600,
+        imageMaxHeight: 1600,
         disableImageResize: false,
         imageForceResize: true,
         done: function (e, data) {
@@ -49,5 +49,18 @@ $(document).ready(function () {
         .bind('fileuploadadd', function (e, data) {
             filestoupload++;
         });
+
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    // if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = mm+'/'+dd+'/'+yyyy;
+    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-' +mm+'-'+dd;
+
+    $('#theDate').attr('value', today);
+
+    // alert($('#theDate').attr('value'));
 
 });

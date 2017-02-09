@@ -13,8 +13,8 @@ $(document).ready(function() {
         return !1;
     }), $("#frm-uploadForm-upload").fileupload({
         dataType: "text",
-        imageMaxWidth: 1200,
-        imageMaxHeight: 1200,
+        imageMaxWidth: 1600,
+        imageMaxHeight: 1600,
         disableImageResize: !1,
         imageForceResize: !0,
         done: function(c, d) {
@@ -30,4 +30,6 @@ $(document).ready(function() {
     }).bind("fileuploadadd", function(a, c) {
         b++;
     });
+    var c = new Date(), d = c.getDate(), e = c.getMonth() + 1, f = c.getFullYear();
+    d < 10 && (d = "0" + d), e < 10 && (e = "0" + e), c = f + "-" + e + "-" + d, $("#theDate").attr("value", c);
 });
