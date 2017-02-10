@@ -159,7 +159,6 @@ class HomepagePresenter extends BasePresenter
             ->setType('date')
             ->setRequired('Zadejte prosím datum')
             ->setDefaultValue(new Nette\Utils\DateTime());
-        $form->onValidate[] = [$this, 'validateUploadForm'];
         $form->addSubmit('submit', 'Ukončit focení')->onClick[] = [$this, 'uploadFormSubmitted'];
         return $form;
     }
