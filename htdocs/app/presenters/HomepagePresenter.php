@@ -5,6 +5,7 @@ namespace App\Presenters;
 
 use Model\PhotoModel;
 use App\Model\SoapService;
+use Nette\Utils\DateTime;
 use Model\UserAuthenticator;
 use Nette;
 
@@ -37,6 +38,12 @@ class HomepagePresenter extends BasePresenter
         $this->photoModel = $photoModel;
         $this->soapService = $soapService;
         $this->userAuthenticator = $userAuthenticator;
+    }
+
+    function validateDate($date)
+    {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        return $d && $d->format('Y-m-d') === $date;
     }
 
     protected function beforeRender()
@@ -150,6 +157,7 @@ class HomepagePresenter extends BasePresenter
             ->addRule(Nette\Application\UI\Form::IMAGE, 'Formát jednoho nebo více obrázků není podporován.');
         $form->addText('target_date')
             ->setType('date')
+            ->setRequired('Zadejte prosím datum')
             ->setDefaultValue(new Nette\Utils\DateTime());
         $form->addSubmit('submit', 'Ukončit focení')->onClick[] = [$this, 'uploadFormSubmitted'];
         return $form;

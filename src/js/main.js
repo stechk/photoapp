@@ -48,6 +48,7 @@ $(document).ready(function () {
     })
         .bind('fileuploadadd', function (e, data) {
             filestoupload++;
+
         });
 
 
@@ -63,4 +64,14 @@ $(document).ready(function () {
 
     // alert($('#theDate').attr('value'));
 
+    $("#theDate").on("input", function() {
+
+        if(this.value !== 'undefined' && this.value.length > 0){
+            $('#upload-btn').show();
+        } else {
+            $("#upload-btn").hide();
+        }
+
+    })
+    //
 });
