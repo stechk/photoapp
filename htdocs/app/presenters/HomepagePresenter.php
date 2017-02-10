@@ -56,6 +56,7 @@ class HomepagePresenter extends BasePresenter
         $post = $this->presenter->getHttpRequest()->getPost();
         $url = $this->presenter->getHttpRequest()->getUrl()->host;
 
+
         if (!$this->photoModel->isAllowedParameter($this->type, $url) && $this->type != null) {
             $this->type = null;
             $this->op = null;
@@ -66,8 +67,7 @@ class HomepagePresenter extends BasePresenter
         $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
         $this->template->op = $this->op;
 
-
-        if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit") {
+        if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit" && $this->validateDate($post['target_date'])) {
             if (count($files) > 0) {
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
                 //ulozeni souboru z formulare
@@ -159,8 +159,13 @@ class HomepagePresenter extends BasePresenter
             ->setType('date')
             ->setRequired('Zadejte prosím datum')
             ->setDefaultValue(new Nette\Utils\DateTime());
+        $form->onValidate[] = [$this, 'validateUploadForm'];
         $form->addSubmit('submit', 'Ukončit focení')->onClick[] = [$this, 'uploadFormSubmitted'];
         return $form;
+    }
+
+    public function validateUploadForm($form,$values){
+        dump($values);die;
     }
 
     public function uploadFormSubmitted(Nette\Forms\Controls\SubmitButton $button)
