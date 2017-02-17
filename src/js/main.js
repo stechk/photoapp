@@ -60,7 +60,8 @@ $(document).ready(function () {
     // if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = mm+'/'+dd+'/'+yyyy;
     if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-' +mm+'-'+dd;
 
-    $('#theDate').attr('value', today);
+    // $('#theDate').attr('value', today);
+    document.getElementById("theDate").defaultValue =today;
 
     // alert($('#theDate').attr('value'));
 
