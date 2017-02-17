@@ -157,8 +157,7 @@ class HomepagePresenter extends BasePresenter
             ->addRule(Nette\Application\UI\Form::IMAGE, 'Formát jednoho nebo více obrázků není podporován.');
         $form->addText('target_date')
             ->setType('date')
-            ->setRequired('Zadejte prosím datum')
-            ->setDefaultValue(new Nette\Utils\DateTime());
+            ->setRequired('Zadejte prosím datum');
         $form->addSubmit('submit', 'Ukončit focení')->onClick[] = [$this, 'uploadFormSubmitted'];
         return $form;
     }
