@@ -61,7 +61,8 @@ $(document).ready(function () {
     if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-' +mm+'-'+dd;
 
     // $('#theDate').attr('value', today);
-    document.getElementById("theDate").defaultValue =today;
+    // document.getElementById("theDate").defaultValue =today;
+    document.getElementById("theDate").valueAsDate = new Date();
 
     // alert($('#theDate').attr('value'));
 
