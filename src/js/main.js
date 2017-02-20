@@ -12,7 +12,7 @@ $(document).ready(function () {
             $('#md1').closeModal();
             document.location = $(that).attr("href");
         });
-    })
+    });
     var interval;
     var filestoupload = 0;
 
@@ -51,20 +51,7 @@ $(document).ready(function () {
 
         });
 
-
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-
-    var yyyy = today.getFullYear();
-    // if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = mm+'/'+dd+'/'+yyyy;
-    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-' +mm+'-'+dd;
-
-    // $('#theDate').attr('value', today);
-    // document.getElementById("theDate").defaultValue =today;
     document.getElementById("theDate").valueAsDate = new Date();
-
-    // alert($('#theDate').attr('value'));
 
     $("#theDate").on("input", function() {
 
@@ -74,6 +61,5 @@ $(document).ready(function () {
             $("#upload-btn").hide();
         }
 
-    })
-    //
+    });
 });

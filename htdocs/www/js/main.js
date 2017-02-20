@@ -29,10 +29,7 @@ $(document).ready(function() {
         }
     }).bind("fileuploadadd", function(a, c) {
         b++;
-    });
-    var c = new Date(), d = c.getDate(), e = c.getMonth() + 1, f = c.getFullYear();
-    d < 10 && (d = "0" + d), e < 10 && (e = "0" + e), c = f + "-" + e + "-" + d, document.getElementById("theDate").valueAsDate = new Date(), 
-    $("#theDate").on("input", function() {
+    }), document.getElementById("theDate").valueAsDate = new Date(), $("#theDate").on("input", function() {
         "undefined" !== this.value && this.value.length > 0 ? $("#upload-btn").show() : $("#upload-btn").hide();
     });
 });
