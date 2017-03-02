@@ -9,6 +9,7 @@
 namespace Model;
 
 use Nette\Database\Connection;
+use Nette\Utils\DateTime;
 
 class PhotoModel
 {
