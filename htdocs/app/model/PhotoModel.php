@@ -37,7 +37,8 @@ class PhotoModel
 
         $this->allowedTypesByUrl = [
             $this->domainInternal["domain"] => $this->domainInternal["sections"],
-            $this->domainExternal["domain"] => $this->domainExternal["sections"]];
+            $this->domainExternal["domain"] => $this->domainExternal["sections"]
+        ];
     }
 
 
@@ -51,9 +52,10 @@ class PhotoModel
         }
     }
 
-    public function getAllTypes(){
+    public function getAllTypes()
+    {
         foreach ($this->allowedTypesByUrl as $domainTypes) {
-            foreach ($domainTypes as $type){
+            foreach ($domainTypes as $type) {
                 $return[] = $type;
             }
         }
@@ -78,9 +80,10 @@ class PhotoModel
         return false;
     }
 
-    public function getTypesByDomain($domain){
-        foreach ($this->allowedTypesByUrl as $k => $domainTypes){
-            if($k == $domain){
+    public function getTypesByDomain($domain)
+    {
+        foreach ($this->allowedTypesByUrl as $k => $domainTypes) {
+            if ($k == $domain) {
                 $return = $domainTypes;
             }
         }
@@ -118,5 +121,12 @@ class PhotoModel
     {
         $this->database->query('INSERT INTO images', $data);
     }
+
+    public function validateDate($date)
+    {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        return $d && $d->format('Y-m-d') === $date;
+    }
+
 
 }
