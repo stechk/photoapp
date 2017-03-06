@@ -13,7 +13,7 @@ use Nette;
 class HomepagePresenter extends BasePresenter
 {
     /**
-     * Poznatek ID
+     * typ prace
      * @persistent
      */
     public $type;
@@ -60,9 +60,8 @@ class HomepagePresenter extends BasePresenter
         if (!$this->photoModel->isAllowedParameter($this->type, $url) && $this->type != null) {
             $this->type = null;
             $this->op = null;
-            $this->redirect("Homepage:".$this->photoModel->getDomainAction($url));
+            $this->redirect("Homepage:default");
         }
-        $this->template->actionByUrl = $this->photoModel->getDomainAction($url);
         $this->template->type = $this->photoModel->getTypeByName($this->type, $url);
         $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
         $this->template->op = $this->op;
@@ -162,12 +161,8 @@ class HomepagePresenter extends BasePresenter
         return $form;
     }
 
-    public function validateUploadForm($form,$values){
-        dump($values);die;
-    }
-
     public function uploadFormSubmitted(Nette\Forms\Controls\SubmitButton $button)
     {
-        $this->redirect('Homepage:'.$this->photoModel->getDomainAction($this->presenter->getHttpRequest()->getUrl()->host), array('type' => null, 'op' => null));
+        $this->redirect('Homepage:default', array('type' => null, 'op' => null));
     }
 }

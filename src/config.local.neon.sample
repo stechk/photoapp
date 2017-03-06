@@ -3,22 +3,22 @@ parameters:
 #    soapUrl: "" #test
     soapLogin: login
     soapPass: pswd
-    domainInternal:
-        domain: fotoapp.local
-        action: default
-        sections: {
-                      {"id" : montaz, "name" : Montáž},
-                      {"id" : servis, "name" : Servis},
-                      {"id" : zamereni, "name" : Zaměření},
-                  }
-    domainExternal:
-        domain: fotoapp2.local
-        action: notDefault
-        sections: {
-                      {"id" : expedice, "name" : Expedice},
-                      {"id" : brilix, "name" : Brilix},
-                      {"id" : vyroba, "name" : Výroba},
-                  }
+    domains: {
+                    fotoapp.local: {
+                            sections: {
+                                            {"id" : '', "name" : ''},
+                                            {"id" : '', "name" : ''},
+                                            {"id" : '', "name" : ''},
+                                      },
+                                    }
+                    fotoapp2.local: {
+                            sections: {
+                                          {"id" : '', "name" : ''},
+                                          {"id" : '', "name" : ''},
+                                          {"id" : '', "name" : ''},
+                                      }
+                                    }
+              }
 
 
 database:

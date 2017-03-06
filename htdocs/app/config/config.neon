@@ -14,7 +14,7 @@ session:
 
 
 services:
-	router: App\RouterFactory::createRouter(%domainInternal%, %domainExternal%)
-	- Model\PhotoModel(@database.default, %domainInternal%, %domainExternal%)
+	router: App\RouterFactory::createRouter()
+	- Model\PhotoModel(@database.default, %domains%)
 	- App\Model\SoapService(%soapUrl%, %soapLogin%, %soapPass%)
 	authenticator: Model\UserAuthenticator(@database.dbVykaz)

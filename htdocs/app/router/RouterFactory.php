@@ -14,7 +14,7 @@ class RouterFactory
     /**
      * @return Nette\Application\IRouter
      */
-    public static function createRouter($domainInternal, $domainExternal)
+    public static function createRouter()
     {
         $router = new RouteList;
         $router[] = new Route('', 'Sign:in');
@@ -22,17 +22,8 @@ class RouterFactory
         $router[] = new Route('upload/[/<id>]', 'Homepage:photoform');
         $router[] = new Route('foto/<action>[/<id>]', [
             'presenter' => 'Homepage',
-            'action' => self::getAction($domainInternal, $domainExternal),
+            'action' => 'default',
         ]);
         return $router;
-    }
-
-    private static function getAction($domain1,$domain2) {
-        if ($_SERVER["HTTP_HOST"] == $domain1["domain"]) {
-            return $domain1["action"];
-        }elseif ($_SERVER["HTTP_HOST"] == $domain2["domain"]) {
-            return $domain2["action"];
-        }
-        throw new Nette\NotImplementedException("Domena neni implementovana");
     }
 }

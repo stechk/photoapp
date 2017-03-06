@@ -23,8 +23,7 @@ class SignPresenter extends BasePresenter
     {
         if($this->user->isLoggedIn())
         {
-//            $this->user->logout();
-            $this->presenter->redirect('Homepage:'.$this->photoModel->getDomainAction($this->presenter->getHttpRequest()->getUrl()->getHostUrl()));
+            $this->presenter->redirect('Homepage:default');
         }
     }
 
@@ -53,8 +52,6 @@ class SignPresenter extends BasePresenter
         }
 
     }
-
-
 
     public function actionOut()
     {
