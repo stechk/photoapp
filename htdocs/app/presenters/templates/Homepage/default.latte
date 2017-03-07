@@ -1,10 +1,14 @@
 {block content}
 <div class="center">
     <div class="container padtop50">
-        {foreach $typesByUrl as $type}
-            <a href="{link Homepage:op, type => $type['id']}"
-               class="waves-effect waves-light btn-large foto-links">{$type['name']}</a>
-        {/foreach}
+        {if !empty($typesByUrl)}
+            {foreach $typesByUrl as $type}
+                <a href="{link Homepage:op, type => $type['id']}"
+                   class="waves-effect waves-light btn-large foto-links">{$type['name']}</a>
+            {/foreach}
+        {else}
+            <p>Kategorie nenalezeny</p>
+        {/if}
     </div>
     <div class="padtop50">
         <img src="{$basePath}/images/albixon_watermark.png">
