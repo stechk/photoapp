@@ -65,10 +65,9 @@ class PhotoModel
             if ($url == $domain) {
                 $return = $data['sections'];
                 return $return;
-            } else {
-                return false;
             }
         }
+        return false;
     }
 
     /**
