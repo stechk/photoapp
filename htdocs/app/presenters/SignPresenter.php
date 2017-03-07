@@ -21,8 +21,7 @@ class SignPresenter extends BasePresenter
 
     public function beforeRender()
     {
-        if($this->user->isLoggedIn())
-        {
+        if ($this->user->isLoggedIn()) {
             $this->presenter->redirect('Homepage:default');
         }
     }

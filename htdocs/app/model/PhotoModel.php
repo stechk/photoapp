@@ -31,9 +31,10 @@ class PhotoModel
         $this->domains = $domains;
     }
 
-    public function getAllTypes(){
-        foreach ($this->domains as $k => $allowedDomain){
-            foreach ($allowedDomain['sections'] as $type){
+    public function getAllTypes()
+    {
+        foreach ($this->domains as $k => $allowedDomain) {
+            foreach ($allowedDomain['sections'] as $type) {
                 $return[] = $type;
             }
         }
@@ -58,9 +59,10 @@ class PhotoModel
         return false;
     }
 
-    public function getTypesByDomain($domain){
-        foreach ($this->domains as $url => $data){
-            if($url == $domain){
+    public function getTypesByDomain($domain)
+    {
+        foreach ($this->domains as $url => $data) {
+            if ($url == $domain) {
                 $return = $data['sections'];
             }
         }
