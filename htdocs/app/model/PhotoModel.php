@@ -9,6 +9,7 @@
 namespace Model;
 
 use Nette\Database\Connection;
+use Nette\Utils\DateTime;
 
 class PhotoModel
 {
@@ -57,6 +58,13 @@ class PhotoModel
             }
         }
         return false;
+    }
+
+    public function getDbEnumTypes(){
+        $type = $this->database->query('SHOW COLUMNS FROM images where Field = "type"')->fetch();
+        preg_match("/^enum\(\'(.*)\'\)$/", $type->Type, $matches);
+        $enum = explode("','", $matches[1]);
+        return $enum;
     }
 
     public function getTypesByDomain($domain)

@@ -7,7 +7,9 @@ use Model\PhotoModel;
 use App\Model\SoapService;
 use Nette\Utils\DateTime;
 use Model\UserAuthenticator;
+use Exception;
 use Nette;
+
 
 
 class HomepagePresenter extends BasePresenter
@@ -62,6 +64,9 @@ class HomepagePresenter extends BasePresenter
 
         if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit" && $this->photoModel->validateDate($post['target_date'])) {
             if (count($files) > 0) {
+                if(!in_array($this->type, $this->photoModel->getDbEnumTypes())){
+                    throw new Exception("Type is not set in database schema");
+                }
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
                 //ulozeni souboru z formulare
                 /** @var Nette\Http\FileUpload $file */
