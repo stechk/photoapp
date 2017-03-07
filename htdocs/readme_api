@@ -1,0 +1,42 @@
+API pro fotoapp
+
+URL
+Api běží na adrese www.fotosm.albixon.cz/api/<metoda>
+Pro ověření vůči app slouží klíč a očekává se jako proměná ?key=<klic>. Klíče je třeba připojit při volání všech požadavků.
+Klič je: f0sd21fa106rf05789a32saf4a6f12asf30asf32dxfg4af63
+
+Struktura odpovědí
+Odpovědi jsou posílány ve formátu JSON.
+Každá odpověď obsahuje  klíč „code“. Tento klíč slouží k posílání návratových stavů dle legendy níže:
+•	0: OK
+•	1: Chyba klíče – klíč není platný
+•	2:Chyba při zpracování požadavku
+
+V případě chyby, se posílá také klíč „error“ se stručným popisem chyby
+V případě zpracování požadavku se posílá klíč „data“ s výstupem
+
+Metody
+www.fotosm.albixon.cz/api/auth
+Metoda očekává 2 parametry ?email=<email> a ?password=<password>
+V případě ověření vrací ID uživatele a jeho jméno.
+Příklad požadavku: www.fotosm.albixon.cz/api/auth?key=f0sd21fa106rf05789a32saf4a6f12asf30asf32dxfg4af63&email=petr.lzicar@albixon.cz&password=mojetajneheslo
+
+www.fotosm.albixon.cz/api/domain-categories
+Metoda neočekává žádný parametr. Vrací seznam kategorii pro danou domenu.
+
+www.fotosm.albixon.cz/api/op
+Metoda očekává parametr ?op=<int>. Posíláný int musí být alespoň 3 znaky dlouhý, jinak služba zahlásí error. Metoda vrací seznam maximálně 50 nalezených op dle volné shody (SQL LIKE %<int>%).
+
+www.fotosm.albixon.cz/api/images
+Metoda očekává parametr ?op=<int>. Metoda vrací seznam obrázků v DB k danému OP.
+
+www.fotosm.albixon.cz/api/upload
+Metoda pro upload 1 obrázku. Očekává POST požadavek v tomto formátu (pro ilustraci uvádím JSON):
+{
+op:<int>,
+category_id:<string>, #ID kategorie, klíče jsou stringové
+user_id:<int> #ID přihlášeného uživatele
+timestamp:<string>, #date ve formátu YYYY-MM-DD
+upload:{<FILE>}
+}
+

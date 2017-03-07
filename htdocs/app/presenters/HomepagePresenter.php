@@ -40,12 +40,6 @@ class HomepagePresenter extends BasePresenter
         $this->userAuthenticator = $userAuthenticator;
     }
 
-    function validateDate($date)
-    {
-        $d = DateTime::createFromFormat('Y-m-d', $date);
-        return $d && $d->format('Y-m-d') === $date;
-    }
-
     protected function beforeRender()
     {
 
@@ -66,7 +60,7 @@ class HomepagePresenter extends BasePresenter
         $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
         $this->template->op = $this->op;
 
-        if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit" && $this->validateDate($post['target_date'])) {
+        if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit" && $this->photoModel->validateDate($post['target_date'])) {
             if (count($files) > 0) {
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
                 //ulozeni souboru z formulare

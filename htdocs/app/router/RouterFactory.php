@@ -24,6 +24,7 @@ class RouterFactory
             'presenter' => 'Homepage',
             'action' => 'default',
         ]);
+        $router[] = new Route("api/<action>","Api:default");
         return $router;
     }
 }
