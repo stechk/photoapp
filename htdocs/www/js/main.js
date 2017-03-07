@@ -29,7 +29,8 @@ $(document).ready(function() {
         }
     }).bind("fileuploadadd", function(a, c) {
         b++;
-    }), document.getElementById("theDate").valueAsDate = new Date(), $("#theDate").on("input", function() {
+    }), null !== document.getElementById("theDate") && (document.getElementById("theDate").valueAsDate = new Date()), 
+    $("#theDate").on("input", function() {
         "undefined" !== this.value && this.value.length > 0 ? $("#upload-btn").show() : $("#upload-btn").hide();
     });
 });
