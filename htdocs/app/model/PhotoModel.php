@@ -14,8 +14,7 @@ use Nette\Utils\DateTime;
 class PhotoModel
 {
 
-    private $domainInternal;
-    private $domainExternal;
+    private $domains;
 
     /**
      * @var Connection
@@ -23,40 +22,20 @@ class PhotoModel
     private $database;
 
 
-    private $allowedTypesByUrl;
-
-
     /**
      * PhotoModel constructor.
      * @param Connection $database
      */
-    public function __construct(Connection $database, $domainInternal, $domainExternal)
+    public function __construct(Connection $database, $domains)
     {
         $this->database = $database;
-        $this->domainInternal = $domainInternal;
-        $this->domainExternal = $domainExternal;
-
-        $this->allowedTypesByUrl = [
-            $this->domainInternal["domain"] => $this->domainInternal["sections"],
-            $this->domainExternal["domain"] => $this->domainExternal["sections"]
-        ];
-    }
-
-
-    public function getDomainAction($domain)
-    {
-        $domain = str_replace("http://", "", $domain);
-        if ($domain == $this->domainExternal["domain"]) {
-            return $this->domainExternal["action"];
-        } elseif ($domain == $this->domainInternal["domain"]) {
-            return $this->domainInternal["action"];
-        }
+        $this->domains = $domains;
     }
 
     public function getAllTypes()
     {
-        foreach ($this->allowedTypesByUrl as $domainTypes) {
-            foreach ($domainTypes as $type) {
+        foreach ($this->domains as $k => $allowedDomain) {
+            foreach ($allowedDomain['sections'] as $type) {
                 $return[] = $type;
             }
         }
@@ -69,9 +48,9 @@ class PhotoModel
      */
     public function isAllowedParameter($type, $url)
     {
-        foreach ($this->allowedTypesByUrl as $allowedUrl => $allowedTypes) {
+        foreach ($this->domains as $allowedUrl => $data) {
             if (str_replace("http://", "", $url) == $allowedUrl) {
-                foreach ($allowedTypes as $item) {
+                foreach ($data['sections'] as $item) {
                     if ($item["id"] == $type) {
                         return true;
                     }
@@ -81,14 +60,22 @@ class PhotoModel
         return false;
     }
 
+    public function getDbEnumTypes(){
+        $type = $this->database->query('SHOW COLUMNS FROM images where Field = "type"')->fetch();
+        preg_match("/^enum\(\'(.*)\'\)$/", $type->Type, $matches);
+        $enum = explode("','", $matches[1]);
+        return $enum;
+    }
+
     public function getTypesByDomain($domain)
     {
-        foreach ($this->allowedTypesByUrl as $k => $domainTypes) {
-            if ($k == $domain) {
-                $return = $domainTypes;
+        foreach ($this->domains as $url => $data) {
+            if ($url == $domain) {
+                $return = $data['sections'];
+                return $return;
             }
         }
-        return $return;
+        return false;
     }
 
     /**
@@ -97,9 +84,9 @@ class PhotoModel
      */
     public function getTypeByName($type, $url)
     {
-        foreach ($this->allowedTypesByUrl as $allowedUrl => $allowedTypes) {
+        foreach ($this->domains as $allowedUrl => $data) {
             if ($url == $allowedUrl) {
-                foreach ($allowedTypes as $item) {
+                foreach ($data['sections'] as $item) {
                     if ($item["id"] == $type) {
                         return $item;
                     }

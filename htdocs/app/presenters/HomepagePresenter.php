@@ -7,13 +7,15 @@ use Model\PhotoModel;
 use App\Model\SoapService;
 use Nette\Utils\DateTime;
 use Model\UserAuthenticator;
+use Exception;
 use Nette;
+
 
 
 class HomepagePresenter extends BasePresenter
 {
     /**
-     * Poznatek ID
+     * typ prace
      * @persistent
      */
     public $type;
@@ -54,15 +56,17 @@ class HomepagePresenter extends BasePresenter
         if (!$this->photoModel->isAllowedParameter($this->type, $url) && $this->type != null) {
             $this->type = null;
             $this->op = null;
-            $this->redirect("Homepage:".$this->photoModel->getDomainAction($url));
+            $this->redirect("Homepage:default");
         }
-        $this->template->actionByUrl = $this->photoModel->getDomainAction($url);
         $this->template->type = $this->photoModel->getTypeByName($this->type, $url);
         $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
         $this->template->op = $this->op;
 
         if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit" && $this->photoModel->validateDate($post['target_date'])) {
             if (count($files) > 0) {
+                if(!in_array($this->type, $this->photoModel->getDbEnumTypes())){
+                    throw new Exception("Type is not set in database schema");
+                }
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
                 //ulozeni souboru z formulare
                 /** @var Nette\Http\FileUpload $file */
@@ -90,26 +94,27 @@ class HomepagePresenter extends BasePresenter
         }
     }
 
-    public function getAllUsersIdName(){
-        $users=  $this->userAuthenticator->getAllUsers()->fetchAll();
-        foreach ($users as $user){
-            $return[$user['users_id']] = $user['name'].' '.$user['lastname'];
+    public function getAllUsersIdName()
+    {
+        $users = $this->userAuthenticator->getAllUsers()->fetchAll();
+        foreach ($users as $user) {
+            $return[$user['users_id']] = $user['name'] . ' ' . $user['lastname'];
         }
         return $return;
     }
 
     public function renderPhotoform()
     {
-        $this->template->opData = $this->soapService->GetCislaOPPart($this->op,'');
+        $this->template->opData = $this->soapService->GetCislaOPPart($this->op, '');
         $users = $this->getAllUsersIdName();
         $photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
-        foreach ($photos as $typ => $type){
-            foreach ($type as $dat => $date){
-                foreach ($date as $id => $data){
+        foreach ($photos as $typ => $type) {
+            foreach ($type as $dat => $date) {
+                foreach ($date as $id => $data) {
 
-                        if (!empty($data['user_id']) && isset($users[$data['user_id']])){
-                            $photos[$typ][$dat][$id]['user_full_name'] = $users[$data['user_id']];
-                        }
+                    if (!empty($data['user_id']) && isset($users[$data['user_id']])) {
+                        $photos[$typ][$dat][$id]['user_full_name'] = $users[$data['user_id']];
+                    }
                 }
             }
         }
@@ -133,7 +138,7 @@ class HomepagePresenter extends BasePresenter
 
     public function searchFormSubmitted(Nette\Application\UI\Form $form, $values)
     {
-        $result = $this->soapService->GetCislaOPPart($values['op'],'');
+        $result = $this->soapService->GetCislaOPPart($values['op'], '');
         if (!empty($result)) {
             $this->template->searchResult = $result;
         } else {
@@ -156,12 +161,8 @@ class HomepagePresenter extends BasePresenter
         return $form;
     }
 
-    public function validateUploadForm($form,$values){
-        dump($values);die;
-    }
-
     public function uploadFormSubmitted(Nette\Forms\Controls\SubmitButton $button)
     {
-        $this->redirect('Homepage:'.$this->photoModel->getDomainAction($this->presenter->getHttpRequest()->getUrl()->host), array('type' => null, 'op' => null));
+        $this->redirect('Homepage:default', array('type' => null, 'op' => null));
     }
 }

@@ -51,7 +51,10 @@ $(document).ready(function () {
 
         });
 
-    document.getElementById("theDate").valueAsDate = new Date();
+    if(document.getElementById("theDate") !== null){
+        document.getElementById("theDate").valueAsDate = new Date();
+    }
+
 
     $("#theDate").on("input", function() {
 
