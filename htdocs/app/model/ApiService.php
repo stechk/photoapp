@@ -127,7 +127,7 @@ class ApiService
     public function uploadImage(Request $httpRequest, $filespath) {
         $files = $httpRequest->getFiles();
         $post = $httpRequest->getPost();
-        if (count($post) > 0 && $this->photoModel->validateDate($post['target_date'])) {
+        if (count($post) > 0 && $this->photoModel->validateDate($post['timestamp'])) {
             if (count($files) > 0) {
                 //ulozeni souboru z formulare
                 /** @var FileUpload $file */
