@@ -145,7 +145,7 @@ class ApiService
                         'op' => $post["op"],
                         'type' => $post["category_id"],
                         'user_id' => $post["user_id"],
-                        'timestamp' => $post["target_date"]
+                        'timestamp' => $post["timestamp"]
                     ];
                     $this->photoModel->saveImage($saveData);
                     return true;
