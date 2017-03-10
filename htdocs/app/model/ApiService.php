@@ -127,7 +127,7 @@ class ApiService
     public function uploadImage(Request $httpRequest, $filespath) {
         $files = $httpRequest->getFiles();
         $post = $httpRequest->getPost();
-        if (count($post) > 0 && $this->photoModel->validateDate($post['timestamp'])) {
+        if (count($post) > 0) {
             if (count($files) > 0) {
                 //ulozeni souboru z formulare
                 /** @var FileUpload $file */
@@ -137,6 +137,11 @@ class ApiService
                 $dest = $filespath . $sharedPath;
                 $destView = "/files" . $sharedPath;
 
+                if (isset($post['timestamp']) && $this->photoModel->validateDate($post['timestamp'])) {
+                    $timeStamp = new DateTime($post["timestamp"]);
+                } else {
+                    $timeStamp = new DateTime();
+                }
                 if ($file->isOk()) {
                     $file->move($dest);
                     $saveData = [
@@ -145,7 +150,7 @@ class ApiService
                         'op' => $post["op"],
                         'type' => $post["category_id"],
                         'user_id' => $post["user_id"],
-                        'timestamp' => $post["timestamp"]
+                        'timestamp' => $timeStamp,
                     ];
                     $this->photoModel->saveImage($saveData);
                     return true;
