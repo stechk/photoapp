@@ -90,7 +90,7 @@ class ApiPresenter extends BasePresenter
         try {
             $this->apiService->uploadImage($this->presenter->getHttpRequest(), $this->getContext()->parameters["wwwDir"] . '/files');
         } catch (\Exception $e) {
-            $this->sendJson(["error" => "Upload failed.", "code" => self::CODE_FAIL]);
+            $this->sendJson(["error" => $e->getMessage(), "code" => self::CODE_FAIL]);
         }
 
         $this->sendJson(["data" => "", "code" => self::CODE_OK]);
