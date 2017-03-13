@@ -96,26 +96,32 @@ class ApiService
     public function findImages($op) {
         $photos = $this->photoModel->findPhotoByOp($op)->fetchAssoc('type|formatted_date|id');
         $users = $this->usersModel->getAllUsers()->fetchAssoc("users_id");
+        $typesDB = $this->photoModel->getAllTypes();
+        $types = [];
+        foreach ($typesDB as $item) {
+            $types[$item["id"]] = $item["name"];
+        }
+
+        $return = [];
         foreach ($photos as $typ => $type){
             foreach ($type as $dat => $date){
                 foreach ($date as $id => $data){
-                    $photos[$typ][$dat][$id]["path"] = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"].$data["filepath"];
+                    $return[$typ]["data"][$dat][$id]["path"] = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"].$data["filepath"];
+                    $return[$typ]["data"][$dat][$id]["type"] = $data["type"];
+                    $return[$typ]["data"][$dat][$id]["timestamp"] = $data["timestamp"];
 
                     if (!empty($data['user_id']) && isset($users[$data['user_id']])){
-                        $photos[$typ][$dat][$id]['user'] = $users[$data['user_id']]["name"] ." ".$users[$data['user_id']]["lastname"];
+                        $return[$typ]["data"][$dat][$id]['user'] = $users[$data['user_id']]["name"] ." ".$users[$data['user_id']]["lastname"];
                     } else {
-                        $photos[$typ][$dat][$id]['user'] = "";
+                        $return[$typ]["data"][$dat][$id]['user'] = "";
                     }
-                    unset($photos[$typ][$dat][$id]["filepath"]);
-                    unset($photos[$typ][$dat][$id]["file_name"]);
-                    unset($photos[$typ][$dat][$id]["id"]);
-                    unset($photos[$typ][$dat][$id]["formatted_date"]);
-                    unset($photos[$typ][$dat][$id]["user_id"]);
-                    unset($photos[$typ][$dat][$id]["op"]);
+                    $return[$typ]["name"] = isset($types[$typ]) ? $types[$typ] : "";
+
+
                 }
             }
         }
-        return $photos;
+        return $return;
     }
 
     /**
