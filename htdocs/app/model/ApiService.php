@@ -130,8 +130,12 @@ class ApiService
         if (count($post) > 0) {
             if (count($files) > 0) {
                 //ulozeni souboru z formulare
+
+                if (!isset($files["upload"])) {
+                    Throw new \Exception("File upload failed. File was not send.", 4);
+                }
                 /** @var FileUpload $file */
-                $file = $files[0];
+                $file = $files["upload"];
                 $rand = rand(100, 999);
                 $sharedPath = "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand . '-' . $file->getSanitizedName();
                 $dest = $filespath . $sharedPath;
