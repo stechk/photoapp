@@ -131,7 +131,7 @@ class ApiService
             if (count($files) > 0) {
                 //ulozeni souboru z formulare
                 /** @var FileUpload $file */
-                $file = $files["upload"][0];
+                $file = $files[0];
                 $rand = rand(100, 999);
                 $sharedPath = "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand . '-' . $file->getSanitizedName();
                 $dest = $filespath . $sharedPath;
