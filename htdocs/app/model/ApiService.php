@@ -137,7 +137,7 @@ class ApiService
                 /** @var FileUpload $file */
                 $file = $files["upload"];
                 $rand = rand(100, 999);
-                $sharedPath = "/" . $this->op . '/' . $this->type . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand . '-' . $file->getSanitizedName();
+                $sharedPath = "/" . $post["op"] . '/' . $post["category_id"] . '/' . date('Y-m-d-H-i-') . time() . '-' . $rand . '-' . $file->getSanitizedName();
                 $dest = $filespath . $sharedPath;
                 $destView = "/files" . $sharedPath;
 
