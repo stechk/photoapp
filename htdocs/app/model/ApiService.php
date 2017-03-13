@@ -134,10 +134,10 @@ class ApiService
                 if (!isset($files["upload"])) {
                     Throw new \Exception("File upload failed. File was not send.", 4);
                 }
-                if (!isset($files["category_id"])) {
+                if (!isset($post["category_id"])) {
                     Throw new \Exception("File upload failed. Category not send.", 5);
                 }
-                if (!isset($files["op"])) {
+                if (!isset($post["op"])) {
                     Throw new \Exception("File upload failed. OP not send.", 6);
                 }
                 /** @var FileUpload $file */
