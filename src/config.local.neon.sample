@@ -1,32 +1,39 @@
 parameters:
+    apiKey: ''
     soapUrl: "" #ostra
-#    soapUrl: "" #test
-    soapLogin: login
-    soapPass: pswd
+    soapLogin: ''
+    soapPass: ''
     domains: {
-                    fotoapp.local: {
-                            sections: {
-                                            {"id" : '', "name" : ''},
-                                            {"id" : '', "name" : ''},
-                                            {"id" : '', "name" : ''},
-                                      },
-                                    }
-                    fotoapp2.local: {
-                            sections: {
-                                          {"id" : '', "name" : ''},
-                                          {"id" : '', "name" : ''},
-                                          {"id" : '', "name" : ''},
-                                      }
-                                    }
+                fotoapp.local: {
+                        sections: {
+                                      {"id" : '', "name" : ''},
+                                      {"id" : '', "name" : ''},
+                                      {"id" : '', "name" : ''},
+                                      {"id" : '', "name" : ''},
+                                  }
+                        soapParms: {
+                                      "method" : '', "tagRoot" : ''
+                                   }
+                                },
+                fotoapp2.local: {
+                        sections: {
+                                      {"id" : '', "name" : ''},
+                                      {"id" : '', "name" : ''},
+                                      {"id" : '', "name" : ''},
+                                  }
+                        soapParms: {
+                                      "method" : '', "tagRoot" : ''
+                                   }
+                                 }
               }
 
 
 database:
     default:
-        dsn: 'mysql:host=127.0.0.1;dbname=test'
-        user: cokoliv
-        password: 'neco'
+        dsn: 'mysql:host=localhost;dbname=test'
+        user:   ''
+        password: ''
     dbVykaz:
-        dsn: 'mysql:host=127.0.0.1;dbname=databasename'
-        user: user
-        password: 'test'
+        dsn: 'mysql:host=test;dbname=test'
+        user: ''
+        password: ''

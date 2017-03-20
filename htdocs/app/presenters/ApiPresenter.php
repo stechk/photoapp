@@ -66,7 +66,7 @@ class ApiPresenter extends BasePresenter
     public function actionOp($op)
     {
         try {
-            $opData = $this->apiService->findOp($op);
+            $opData = $this->apiService->findOp($op, $this->presenter->getHttpRequest()->getUrl()->host);
         } catch (\Exception $e) {
             $this->sendJson(["error" => "OP items not found.", "code" => self::CODE_FAIL]);
         }

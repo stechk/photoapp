@@ -60,7 +60,12 @@ class PhotoModel
         return false;
     }
 
-    public function getDbEnumTypes(){
+    /**
+     * Vrací enum (zamereni,montaz) typy jako pole z db jako kontrola
+     * @return array
+     */
+    public function getDbEnumTypes()
+    {
         $type = $this->database->query('SHOW COLUMNS FROM images where Field = "type"')->fetch();
         preg_match("/^enum\(\'(.*)\'\)$/", $type->Type, $matches);
         $enum = explode("','", $matches[1]);
@@ -82,7 +87,7 @@ class PhotoModel
      * @param $type
      * @return mixed
      */
-    public function getTypeByName($type, $url)
+    public function getConfItemByType($type, $url)
     {
         foreach ($this->domains as $allowedUrl => $data) {
             if ($url == $allowedUrl) {
@@ -91,6 +96,15 @@ class PhotoModel
                         return $item;
                     }
                 }
+            }
+        }
+    }
+
+    public function getSoapParmsByDomain($domain)
+    {
+        foreach ($this->domains as $url => $data) {
+            if ($url == $domain) {
+                return $data['soapParms'];
             }
         }
     }

@@ -11,7 +11,6 @@ use Exception;
 use Nette;
 
 
-
 class HomepagePresenter extends BasePresenter
 {
     /**
@@ -58,14 +57,14 @@ class HomepagePresenter extends BasePresenter
             $this->op = null;
             $this->redirect("Homepage:default");
         }
-        $this->template->type = $this->photoModel->getTypeByName($this->type, $url);
+        $this->template->type = $this->photoModel->getConfItemByType($this->type, $url);
         $this->template->typesByUrl = $this->photoModel->getTypesByDomain($this->presenter->getHttpRequest()->getUrl()->host);
         $this->template->op = $this->op;
 
         if (count($post) > 0 && isset($post["_do"]) && $post["_do"] == "uploadForm-submit" && $this->photoModel->validateDate($post['target_date'])) {
             if (count($files) > 0) {
-                if(!in_array($this->type, $this->photoModel->getDbEnumTypes())){
-                    throw new Exception("Type is not set in database schema",500);
+                if (!in_array($this->type, $this->photoModel->getDbEnumTypes())) {
+                    throw new Exception("Type is not set in database schema", 500);
                 }
                 $filespath = $this->getContext()->parameters["wwwDir"] . '/files';
                 //ulozeni souboru z formulare
@@ -105,7 +104,7 @@ class HomepagePresenter extends BasePresenter
 
     public function renderPhotoform()
     {
-        $this->template->opData = $this->soapService->GetCislaOPPart($this->op, '');
+        $this->template->opData = $this->soapService->getSearchResults($this->op, '', $this->photoModel->getSoapParmsByDomain($this->presenter->getHttpRequest()->getUrl()->host));
         $users = $this->getAllUsersIdName();
         $photos = $this->photoModel->findPhotoByOp($this->op)->fetchAssoc('type|formatted_date|id');
         foreach ($photos as $typ => $type) {
@@ -138,7 +137,7 @@ class HomepagePresenter extends BasePresenter
 
     public function searchFormSubmitted(Nette\Application\UI\Form $form, $values)
     {
-        $result = $this->soapService->GetCislaOPPart($values['op'], '');
+        $result = $this->soapService->getSearchResults($values['op'], '', $this->photoModel->getSoapParmsByDomain($this->presenter->getHttpRequest()->getUrl()->host));
         if (!empty($result)) {
             $this->template->searchResult = $result;
         } else {

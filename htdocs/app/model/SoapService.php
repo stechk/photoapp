@@ -32,10 +32,8 @@ class SoapService
 
     }
 
-    public function GetCislaOPPart($partOfOP, $partOfPartner, $countOfReturned = 50)
+    public function getSearchResults($partOfOP, $partOfPartner, $soapParms, $countOfReturned = 50)
     {
-        $method = "GetCislaOPPart";
-//
         $xml_post_string = '<?xml version="1.0" encoding="utf-8" ?>
             <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
               <soap:Header>
@@ -46,15 +44,15 @@ class SoapService
                 </F2SoapHeader>
               </soap:Header>
               <soap:Body>
-                <GetCislaOPPart xmlns="http://www.albixon.cz">
+                <' . $soapParms['method'] . ' xmlns="http://www.albixon.cz">
                   <castCisla>' . $partOfOP . '</castCisla>
                   <castPartner>' . $partOfPartner . '</castPartner>
                   <maxPocet>' . $countOfReturned . '</maxPocet>
-                </GetCislaOPPart>
+                </' . $soapParms['method'] . '>
               </soap:Body>
             </soap:Envelope>';
 
-        $response = $this->callService($xml_post_string, $method);
+        $response = $this->callService($xml_post_string, $soapParms['method']);
 
         //DEBUG
 //        $parser = simplexml_load_string($response);
@@ -68,16 +66,16 @@ class SoapService
 
         $ops = [];
 
-        foreach ($doc->getElementsByTagName("cislaOP")[0]->childNodes as $o) {
+        foreach ($doc->getElementsByTagName($soapParms['tagRoot'])[0]->childNodes as $o) {
 
-                $ops[] =
-                    [
-                        "op" => (int)$o->nodeValue,
-                        "partner" => $o->getElementsByTagName("partner")[0]->nodeValue,
-                        "mistoPlneni" => $o->getElementsByTagName("mistoPlneni")[0]->nodeValue,
-                        "kategorie" => $o->getElementsByTagName("kategorie")[0]->nodeValue,
+            $ops[] =
+                [
+                    "op" => (int)$o->nodeValue,
+                    "partner" => $o->getElementsByTagName("partner")[0]->nodeValue,
+                    "mistoPlneni" => $o->getElementsByTagName("mistoPlneni")[0]->nodeValue,
+                    "kategorie" => $o->getElementsByTagName("kategorie")[0]->nodeValue,
 
-                    ];
+                ];
 
 
         }
