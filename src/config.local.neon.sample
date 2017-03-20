@@ -25,6 +25,14 @@ parameters:
                                       "method" : '', "tagRoot" : ''
                                    }
                                  }
+                eshop.local: {
+                        sections: {
+                                     {"id" : '', "name" : ''},
+                                  }
+                        soapParms: {
+                                      "method" : '', "tagRoot" : ''
+                                   }
+                             }
               }
 
 
