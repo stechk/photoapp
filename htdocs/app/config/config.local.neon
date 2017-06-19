@@ -1,0 +1,44 @@
+
+    domains: {
+                fotoapp.local: {
+                        sections: {
+                                      {"id" : montaz, "name" : Montáž},
+                                      {"id" : servis, "name" : Servis},
+                                      {"id" : zamereni, "name" : Zaměření},
+                                      {"id" : reklamace, "name" : Reklamace},
+                                      {"id" : stavebni_prace, "name" : 'Stavební práce'},
+                                  }
+                        soapParms: {
+                                      "method" : GetCislaOPPart, "tagRoot" : cislaOP
+                                   }
+                                },
+                fotoapp2.local: {
+                        sections: {
+                                      {"id" : expedice, "name" : Expedice},
+                                      {"id" : brilix, "name" : Brilix},
+                                      {"id" : vyroba, "name" : Výroba},
+                                  }
+                        soapParms: {
+                                      "method" : GetCislaOPPart, "tagRoot" : cislaOP
+                                   }
+                                 }
+                eshop.local: {
+                         sections: {
+                                      {"id" : eshop, "name" : Eshop},
+                                   }
+                         soapParms: {
+                                       "method" : GetListVS, "tagRoot" : listVS
+                                    }
+                              }
+              }
+
+
+database:
+    default:
+        dsn: 'mysql:host=localhost;dbname=foto'
+        user:   root
+        password: ''
+    dbVykaz:
+        dsn: 'mysql:host=localhost;dbname=auth_test'
+        user: root
+        password: ''
