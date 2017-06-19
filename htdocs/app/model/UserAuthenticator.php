@@ -14,7 +14,7 @@ use Nette\Security as NS;
 
 class UserAuthenticator implements NS\IAuthenticator
 {
-    const SALT = 'albixon';
+    const SALT = 'test';
     public $database;
 
     function __construct(Connection $database)

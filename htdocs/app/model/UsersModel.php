@@ -13,7 +13,7 @@ use Nette\Database\Connection;
 
 class UsersModel
 {
-
+    const SALT = 'test';
     /**
      * @var Connection
      */
@@ -33,5 +33,19 @@ class UsersModel
     public function getAllUsers()
     {
         return $this->dbVykaz->query('SELECT * FROM users');
+    }
+
+    public function registrate($values){
+        $this->dbVykaz->query('INSERT INTO users ?', $values);
+    }
+
+    /**
+     * vrací hash hesla
+     * @param string $string
+     * @return string
+     */
+    public function calculateHash($string)
+    {
+        return sha1($string . str_repeat(self::SALT, 5));
     }
 }

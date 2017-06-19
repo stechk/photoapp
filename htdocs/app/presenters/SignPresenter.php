@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 
 use Model\PhotoModel;
+use Model\UsersModel;
 use Nette;
 
 
@@ -11,12 +12,14 @@ class SignPresenter extends BasePresenter
 {
 
 
-    public $photoModel;
+    private $photoModel;
+    private $userModel;
 
 
-    public function __construct(PhotoModel $photoModel)
+    public function __construct(PhotoModel $photoModel, UsersModel $usersModel)
     {
         $this->photoModel = $photoModel;
+        $this->userModel = $usersModel;
     }
 
     public function beforeRender()
@@ -57,6 +60,34 @@ class SignPresenter extends BasePresenter
         $this->getUser()->logout();
         $this->flashMessage('Byli jste odhlášeni');
         $this->redirect('in');
+    }
+
+    protected function createComponentSignUpForm()
+    {
+        $form = new Nette\Application\UI\Form();
+        $form->addText('name', 'Křestní jméno:')
+            ->setRequired('Please enter your name.');
+        $form->addEmail('email', 'Email:')
+            ->setRequired('Please enter your name.');
+        $form->addText('lastname', 'Příjmení:')
+            ->setRequired('Please enter your lastname.');
+
+        $form->addPassword('password', 'Heslo:')
+            ->setRequired('Please enter your password.');
+
+        $form->addSubmit('send', 'Registrovat');
+
+        $form->onSuccess[] = array($this, 'signUpFormSubmitted');
+        return $form;
+
+    }
+
+    public function signUpFormSubmitted(Nette\Application\UI\Form $form, $values)
+    {
+        $values->password = $this->userModel->calculateHash($values->password);
+       $this->userModel->registrate($values);
+       $this->flashMessage('Registrace proběhla v pořádku');
+       $this->redirect('Sign:in');
     }
 
 }

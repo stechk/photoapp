@@ -1,19 +1,37 @@
 {block content}
 <div id="login">
     <div class="container">
-    <h1 class="login-heading center" n:block=title>Foto - Přihlášení</h1>
+    <h1 class="login-heading center" n:block=title>Foto - Registrace</h1>
 
     <div class="login-form">
-        {form signInForm}
+        {form signUpForm}
             <div class="errors alert-danger mt20" n:if="$form->hasErrors()"
                  n:foreach="$form->errors as $error">{$error}</div>
             <div class="row mt20">
                 <div class="col-sm-3">
                     <i class="material-icons prefix">account_circle</i>
-                    {label username, for=> "email", class=> "email-label control-label"/}
+                    {label name, for=> "name", class=> "name-label control-label"/}
                 </div>
                 <div class="col-sm-9">
-                    {input username, class=> "email form-control"}
+                    {input name, class=> "name form-control"}
+                </div>
+            </div>
+            <div class="row mt20">
+                <div class="col-sm-3">
+                    <i class="material-icons prefix">account_circle</i>
+                    {label lastname, for=> "lastname", class=> "email-label control-label"/}
+                </div>
+                <div class="col-sm-9">
+                    {input lastname, class=> "email form-control"}
+                </div>
+            </div>
+            <div class="row mt20">
+                <div class="col-sm-3">
+                    <i class="material-icons prefix">account_circle</i>
+                    {label email, for=> "email", class=> "email-label control-label"/}
+                </div>
+                <div class="col-sm-9">
+                    {input email, class=> "email form-control"}
                 </div>
             </div>
             <div class="row mt20">
@@ -29,7 +47,7 @@
                 <div class="col-sm-8 col-sm-offset-2">
                     <i class="send fright form-control btn waves-effect waves-light foto-links waves-input-wrapper" style="">
                         <i class="material-icons right arrow-login">send</i>
-                        <input type="submit" name="send" value="Přihlásit" class="waves-button-input"></i>
+                        <input type="submit" name="send" value="Registrovat" class="waves-button-input"></i>
                 </div>
             </div>
         {/form}

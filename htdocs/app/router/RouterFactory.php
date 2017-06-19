@@ -18,6 +18,7 @@ class RouterFactory
     {
         $router = new RouteList;
         $router[] = new Route('', 'Sign:in');
+        $router[] = new Route('registrace/', 'Sign:up');
         $router[] = new Route('odhlaseni/', 'Sign:out');
         $router[] = new Route('upload/[/<id>]', 'Homepage:photoform');
         $router[] = new Route('foto/<action>[/<id>]', [
